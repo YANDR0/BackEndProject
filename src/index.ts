@@ -1,15 +1,22 @@
-import express from "express";
+import express from 'express';
+import { connect } from 'mongoose';
+import { config } from 'dotenv';
+config();
 import routes from './routes';
 
-const port = process.env.PORT || 3000;
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('', (req, res) => {
-    res.send('AAA!')
-})
+const dbUrl = process.env.DB_URL;
+console.log('Mongo URL: ', dbUrl);
 
 app.use(routes);
 
-app.listen(port, () => {
-    console.log(`Puerto ${port}`)
-})
+connect(dbUrl as string).then(res => {
+    console.log('Ya se conectó la base');
+    app.listen(port, () => {
+        console.log(`App is running in port ${port}`)
+    });
+}).catch(err => {
+    console.log("Error");
+});

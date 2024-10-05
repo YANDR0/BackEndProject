@@ -1,4 +1,4 @@
-import usuariosController from "./usuarios.controllers";
+import usuariosController from "./users.controllers";
 
 export default {
     usuariosController
