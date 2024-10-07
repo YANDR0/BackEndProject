@@ -10,6 +10,9 @@ const port = process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL;
 console.log('Mongo URL: ', dbUrl);
 
+// Middleware para aceptar JSON
+app.use(express.json());
+
 app.use(routes);
 
 connect(dbUrl as string).then(res => {

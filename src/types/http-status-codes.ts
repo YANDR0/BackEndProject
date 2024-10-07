@@ -1,5 +1,6 @@
 export enum HTTP_STATUS_CODES {
     SUCCESS = 200,
+    CREATED = 201,
     AUTHORIZATION = 401,
     FORBIDDEN = 403,
     NOT_FOUND = 404,
