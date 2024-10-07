@@ -4,7 +4,7 @@ const listSchema = new Schema({
     userId: { type: SchemaTypes.String, required: true},
     restaurantId: { type: SchemaTypes.String, required: true},
     category: [ { type: SchemaTypes.String} ],
-    score: { type: SchemaTypes.number },
+    score: { type: SchemaTypes.Number },
 }); 
 
 const user = model('list', listSchema);

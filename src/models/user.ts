@@ -9,7 +9,7 @@ const userSchema = new Schema({
     location: { type: SchemaTypes.String }, //0=Zapopan, 1=Guadalajara, 2=Tlaquepaque, etc etc o el lugar también :v
     biography: { type: SchemaTypes.String },
     image: { type: SchemaTypes.String },
-    status: { type: SchemaTypes.number, require: true}
+    status: { type: SchemaTypes.Number, require: true}
 });
 
 const user = model('user', userSchema);
