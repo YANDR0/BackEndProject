@@ -55,9 +55,9 @@ class CategoryControllers {
         const { _id } = req.body;
         Category.findOneAndDelete({ _id: _id }).then((deletedCategory: CategoryType | null) => {
             if (deletedCategory) {
-                res.send({ message: "Usuario eliminado correctamente" });
+                res.send({ message: "Categoria eliminada correctamente" });
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Usuario no encontrado" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Categoria no encontrada" });
             }
         }).catch(() => {
             res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
@@ -72,7 +72,7 @@ class CategoryControllers {
             if (updatedCategory) {
                 res.send(updatedCategory);
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Usuario no encontrado" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Categoria no encontrada" });
             }
         }).catch(() => {
             res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);

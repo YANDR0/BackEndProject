@@ -22,7 +22,7 @@ class ReviewsControllers {
             if(reviewList) {
                 res.send(reviewList)
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Categorias no encontradas" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Reseña no encontrada" });
             }
         }).catch(HTTP_STATUS_CODES.SERVER_ERROR);
     };
@@ -43,9 +43,9 @@ class ReviewsControllers {
         const { _id } = req.body;
         Review.findOneAndDelete({ _id: _id }).then((deletedReview: ReviewType | null) => {
             if (deletedReview) {
-                res.send({ message: "Usuario eliminado correctamente" });
+                res.send({ message: "Reseña eliminada correctamente" });
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Usuario no encontrado" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Reseña no encontrada" });
             }
         }).catch(() => {
             res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
@@ -54,13 +54,13 @@ class ReviewsControllers {
 
     //Actualizar una review ya existente
     updateReview(req: Request, res: Response){
-        const { _id } = req.body;  // Obtener email del usuario a actualizar
-        const updateReview = req.body; // Toda la info del usuario
+        const { _id } = req.body;
+        const updateReview = req.body;
         Review.findOneAndUpdate({ _id: _id }, updateReview, { new: true }).then((updatedReview: ReviewType | undefined) => {
             if (updatedReview) {
                 res.send(updatedReview);
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Usuario no encontrado" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Reseña no encontrada" });
             }
         }).catch(() => {
             res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
