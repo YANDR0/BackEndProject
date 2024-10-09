@@ -7,5 +7,5 @@ const listSchema = new Schema({
     score: { type: SchemaTypes.Number },
 }); 
 
-const user = model('list', listSchema);
-export default user;
+const userList = model('userlist', listSchema);
+export default userList;

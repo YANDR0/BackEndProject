@@ -8,5 +8,5 @@ const reviewSchema = new Schema({
     priority: { type: SchemaTypes.Number, default: 0 },
 });
 
-const user = model('user', reviewSchema);
-export default user;
+const review = model('review', reviewSchema);
+export default review;
