@@ -37,14 +37,13 @@ class CategoryControllers {
                 res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Categorias no encontradas" });
             }
         }).catch(HTTP_STATUS_CODES.SERVER_ERROR);
-
-    }
+    };
     
     //Crear una nueva categoría
     createCategory(req: Request, res: Response){
         const { id, name, type } = req.body;
-        const newUser = new Category({ id, name, type });
-        newUser.save().then((category: CategoryType) => {
+        const newCategory = new Category({ id, name, type });
+        newCategory.save().then((category: CategoryType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(category);
         }).catch(() => {
             res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
@@ -53,8 +52,8 @@ class CategoryControllers {
 
     //Borrar una categoría existente
     deleteCategory(req: Request, res: Response){
-        const { id } = req.body;
-        Category.findOneAndDelete({ _id: id }).then((deletedCategory: CategoryType | null) => {
+        const { _id } = req.body;
+        Category.findOneAndDelete({ _id: _id }).then((deletedCategory: CategoryType | null) => {
             if (deletedCategory) {
                 res.send({ message: "Usuario eliminado correctamente" });
             } else {
