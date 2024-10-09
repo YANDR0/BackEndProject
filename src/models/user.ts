@@ -1,7 +1,7 @@
 const { Schema, model, SchemaTypes } = require('mongoose');
 
 const userSchema = new Schema({
-    id: { type: SchemaTypes.String},
+    //id: { type: SchemaTypes.String},      //Vemos si usamos el de mongo 
     name: { type: SchemaTypes.String, required: true },
     email: { type: SchemaTypes.String, required: true },
     password: { type: SchemaTypes.String },
