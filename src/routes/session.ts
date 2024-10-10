@@ -1,13 +1,13 @@
 import { Router } from "express";
-import sessionControllers from "../controllers/session.controllers";
-//import { roles } from "../middlewares/auth";
+import controllers from "../controllers/index";
 
-const router = Router();
+const sessionController = controllers.sessionController;
+const router = Router()
 
 // getUser (Login) by email & password (POST for more security)
-router.post('/login', sessionControllers.getUser);
+router.post('/login', sessionController.getUser);
 
 // createUser (Register) by name, email & password 
-router.post('/register', sessionControllers.createUser);
+router.post('/register', sessionController.createUser);
 
 export default router;

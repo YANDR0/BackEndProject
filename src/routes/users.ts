@@ -1,15 +1,11 @@
 import { Router } from "express";
-import usersControllers from "../controllers/users.controllers";
-//import { roles } from "../middlewares/auth";
+import controllers from "../controllers/index";
 
-const router = Router();
+const usersControllers = controllers.usersController;
+const router = Router()
 
-// router.get('', usersControllers.getAll);
-
-// updateUser (Edit) by all user data
-router.put('/config', usersControllers.updateUser);
-
-// deleteUser (Delete) by email
-router.delete('/config', usersControllers.deleteUser);
+router.get('', usersControllers.getAll); // Obtener todos los usuarios
+router.put('/config', usersControllers.updateUser); // updateUser (Edit) by all user data
+router.delete('/config', usersControllers.deleteUser); // deleteUser (Delete) by email
 
 export default router;

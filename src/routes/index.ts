@@ -18,7 +18,4 @@ router.use('/reviews', reviewsRoutes);  //Este podría ir dentro de users o rest
 router.use('/list', listRoutes);    //Este podría ir dentro de users o algo así
 router.use('/category', categoryRoutes);    //Este podría ir dentro de restaurants o algo así
 
-
-
-
 export default router;

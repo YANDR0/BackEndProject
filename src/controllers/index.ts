@@ -1,9 +1,15 @@
-import usuariosController from "./users.controllers";
+import usersController from "./users.controllers";
 import restaurantsController from "./restaurants.controllers";
 import sessionController from "./session.controllers";
+import categoryControllers from "./category.controllers";
+import listControllers from "./list.controllers";
+import reviewsControllers from "./reviews.controllers";
 
 export default {
-    usuariosController,
+    usersController,
     restaurantsController,
-    sessionController
+    sessionController,
+    categoryControllers,
+    listControllers,
+    reviewsControllers
 }

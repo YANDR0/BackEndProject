@@ -16,10 +16,10 @@ class RestaurantsControllers {
 
     //Obtener la información de un restaurant
     getRestaurants(req: Request, res: Response){
-        const { restaurantId } = req.body;
-        Restaurant.find({ userId: restaurantId }).then((restaurant: RestaurantType | undefined) => {
-            if(restaurantId) {
-                res.send(restaurantId)
+        const { _id } = req.body;
+        Restaurant.findOne({ _id: _id }).then((restaurant: RestaurantType | undefined) => {
+            if(restaurant) {
+                res.send(restaurant)
             } else {
                 res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Restaurant no encontrado" });
             }

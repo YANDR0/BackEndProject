@@ -41,8 +41,8 @@ class CategoryControllers {
     
     //Crear una nueva categoría
     createCategory(req: Request, res: Response){
-        const { name, type } = req.body;
-        const newCategory = new Category({ name, type });
+        const { category, type } = req.body;
+        const newCategory = new Category({ category, type });
         newCategory.save().then((category: CategoryType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(category);
         }).catch(() => {
