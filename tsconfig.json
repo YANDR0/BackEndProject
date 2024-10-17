@@ -6,7 +6,8 @@
         "target": "ES6",
         "noImplicitAny": true,
         "esModuleInterop": true,
-        "module": "NodeNext"
+        "module": "NodeNext",
+        "resolveJsonModule": true
     }
 }
 
