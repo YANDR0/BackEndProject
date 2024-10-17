@@ -6,16 +6,29 @@ import reviewsRoutes from './reviews';
 import listRoutes from './list';
 import categoryRoutes from './category';
 
-
 const router = Router();
 
-router.use('', sessionRoutes);
+/**
+ * @swagger
+ * /:
+ *  get:
+ *   tags: [Home]
+ *   description: Home endpoint
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('', (req, res) => {
+    res.send('Api works!')
+})
+
+router.use('/session', sessionRoutes);
 router.use('/user', usersRoutes);
 router.use('/restaurant', restaurantsRoutes);
 
-//Temporales
-router.use('/reviews', reviewsRoutes);  //Este podría ir dentro de users o restaurants
-router.use('/list', listRoutes);    //Este podría ir dentro de users o algo así
-router.use('/category', categoryRoutes);    //Este podría ir dentro de restaurants o algo así
+
+router.use('/reviews', reviewsRoutes);  
+router.use('/list', listRoutes);   
+router.use('/category', categoryRoutes);
 
 export default router;
