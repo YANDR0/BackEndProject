@@ -2,11 +2,14 @@ import { Request, Response } from "express";
 import User from '../models/user';
 import { User as UserType } from "../types/user";
 import { HTTP_STATUS_CODES } from "../types/http-status-codes";
+import bcrypt from 'bcrypt';
 
 class SessionControllers {
+    
     // Obtener un solo usuario por email y password
     getUser(req: Request, res: Response) {
         const { email, password } = req.body;
+
         User.findOne({ email, password }).then((user: UserType | undefined) => {
             if (user) {
                 res.send(user);
@@ -19,9 +22,11 @@ class SessionControllers {
     }
 
     // Crear un usuario nuevo (solo con email, username y password)
-    createUser(req: Request, res: Response) {
-        const { email, name, password } = req.body;
+    async createUser(req: Request, res: Response) {
+        const password = await bcrypt.hash(req.body.password, 10);
+        const { email, name } = req.body;
         const newUser = new User({ email, name, password });
+
         newUser.save().then((user: UserType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(user);
         }).catch(() => {
