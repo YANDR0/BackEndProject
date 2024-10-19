@@ -49,6 +49,18 @@ router.post('', categoryController.createCategory);
  *  delete:
  *   tags: [Category]
  *   description: Delete a category
+ *   consumes:
+ *    - application/json
+ *   parameters:
+ *    - in: body
+ *      name: parameters
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  *   responses: 
  *    200:
  *     description: api successful yei
@@ -61,6 +73,18 @@ router.delete('', categoryController.deleteCategory);
  *  put:
  *   tags: [Category]
  *   description: Update a category
+ *   consumes:
+ *    - application/json
+ *   parameters:
+ *    - in: body
+ *      name: parameters
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  *   responses: 
  *    200:
  *     description: api successful yei
@@ -73,6 +97,18 @@ router.put('', categoryController.updateCategory)
  *  get:
  *   tags: [Category]
  *   description: Get all categorys with an specific id
+ *   consumes:
+ *    - application/json
+ *   parameters:
+ *    - in: body
+ *      name: parameters
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  *   responses: 
  *    200:
  *     description: api successful yei

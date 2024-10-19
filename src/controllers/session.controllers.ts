@@ -8,9 +8,9 @@ class SessionControllers {
     
     // Obtener un solo usuario por email y password
     getUser(req: Request, res: Response) {
-        const { email, password } = req.body.parameters;
+        const { _id } = req.body.parameters;
 
-        User.findOne({ email, password }).then((user: UserType | undefined) => {
+        User.findOne({ _id }).then((user: UserType | undefined) => {
             if (user) {
                 res.send(user);
             } else {
