@@ -6,7 +6,7 @@ import { HTTP_STATUS_CODES } from "../types/http-status-codes";
 export  function emailInUse(creating: boolean){
     return async (req: Request, res: Response, next: NextFunction) => {
         
-        const email = req.body.parameters.email;
+        const email = req.body.email;
         try {
             const results = await userModel.find({email: email});
             if(creating && results.length > 0) return res.sendStatus(HTTP_STATUS_CODES.BAD_REQUEST);

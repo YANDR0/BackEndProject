@@ -1,5 +1,6 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
+import { checkParameters } from "../middlewares/checkParameters";
 
 const restaurantsController = controllers.restaurantsController;
 const router = Router();
@@ -55,14 +56,27 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
 /**
  * @swagger
  * /restaurant/info:
- *  get:
+ *  post:
  *   tags: [Restaurant]
  *   description: Get information from one specific restaurant
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  *   responses: 
  *    200:
  *     description: api successful yei
  */
-router.get('/info', restaurantsController.getRestaurants); // Obtener la información de un restaurante
+router.get('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 
 /**
  * @swagger

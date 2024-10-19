@@ -17,7 +17,7 @@ class CategoryControllers {
 
     //Obtener una o más categorías a partir de su id
     getCategories(req: Request, res: Response){
-        const { idList } = req.body.parameters;   //Luego reviso si puedo poner ids yo o los tengo que robar
+        const { idList } = req.body;   //Luego reviso si puedo poner ids yo o los tengo que robar
         Category.find({ _id: { $in: idList }}).then((categoryList: CategoryType[] | undefined) => {
             if(categoryList) {
                 res.send(categoryList)
@@ -29,7 +29,7 @@ class CategoryControllers {
 
     //Obtener todas las categorías del mismo tipo
     getCategoriesByType(req: Request, res: Response){
-        const { type } = req.body.parameters;
+        const { type } = req.body;
         Category.find({ type: type }).then((categoryList: CategoryType[] | undefined) => {
             if(categoryList) {
                 res.send(categoryList)
@@ -41,7 +41,7 @@ class CategoryControllers {
     
     //Crear una nueva categoría
     createCategory(req: Request, res: Response){
-        const { category, type } = req.body.parameters;
+        const { category, type } = req.body;
         const newCategory = new Category({ category, type });
         newCategory.save().then((category: CategoryType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(category);
@@ -52,7 +52,7 @@ class CategoryControllers {
 
     //Borrar una categoría existente
     deleteCategory(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         Category.findOneAndDelete({ _id: _id }).then((deletedCategory: CategoryType | null) => {
             if (deletedCategory) {
                 res.send({ message: "Categoria eliminada correctamente" });
@@ -66,7 +66,7 @@ class CategoryControllers {
 
     //Actualizar datos de una categoría
     updateCategory(req: Request, res: Response){
-        const { _id } = req.body.parameters;  // Obtener email del usuario a actualizar
+        const { _id } = req.body;  // Obtener email del usuario a actualizar
         const updateData = req.body.update; // Toda la info del usuario
         Category.findOneAndUpdate({ _id: _id }, updateData, { new: true }).then((updatedCategory: CategoryType | undefined) => {
             if (updatedCategory) {

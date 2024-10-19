@@ -17,7 +17,7 @@ class ReviewsControllers {
     
     //Obtener todas las reseñas de un restaurant
     getRestaurantReviews(req: Request, res: Response){
-        const { restaurantId } = req.body.parameters;
+        const { restaurantId } = req.body;
         Review.find({ restaurantId:  restaurantId }).then((reviewList: ReviewType[] | undefined) => {
             if(reviewList) {
                 res.send(reviewList)
@@ -29,7 +29,7 @@ class ReviewsControllers {
 
     //Crear una nueva reseña a partir del ususario y el restaurant
     createReview(req: Request, res: Response){
-        const { userId, restaurantId, score, content, priority} = req.body.parameters;
+        const { userId, restaurantId, score, content, priority} = req.body;
         const newReview = new Review({ userId, restaurantId, score, content, priority});
         newReview.save().then((review: ReviewType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(review);
@@ -40,7 +40,7 @@ class ReviewsControllers {
 
     //Borrar una review ya existente
     deleteReview(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         Review.findOneAndDelete({ _id: _id }).then((deletedReview: ReviewType | null) => {
             if (deletedReview) {
                 res.send({ message: "Reseña eliminada correctamente" });
@@ -54,7 +54,7 @@ class ReviewsControllers {
 
     //Actualizar una review ya existente
     updateReview(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         const updateReview = req.body.update;
         Review.findOneAndUpdate({ _id: _id }, updateReview, { new: true }).then((updatedReview: ReviewType | undefined) => {
             if (updatedReview) {

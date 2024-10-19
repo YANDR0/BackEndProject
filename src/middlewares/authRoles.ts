@@ -8,7 +8,7 @@ import { HTTP_STATUS_CODES } from "../types/http-status-codes";
 export  function checkPermissions(neededRole: number){
     return async (req: Request, res: Response, next: NextFunction) => {
 
-        const currRole = req.body.parameters.role //Lo más seguro es que se saque del jwt y no de aquí
+        const currRole = req.body.role //Lo más seguro es que se saque del jwt y no de aquí
         if(currRole & neededRole) next();
         res.status(HTTP_STATUS_CODES.FORBIDDEN);
     }

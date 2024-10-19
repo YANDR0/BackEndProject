@@ -16,7 +16,7 @@ class RestaurantsControllers {
 
     //Obtener la información de un restaurant
     getRestaurants(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         Restaurant.findOne({ _id: _id }).then((restaurant: RestaurantType | undefined) => {
             if(restaurant) {
                 res.send(restaurant)
@@ -28,7 +28,7 @@ class RestaurantsControllers {
     
     //Obtener todos los restaurantes de una categoría (Igual podemos dejarlo usar más filtros)
     getRestaurantsByCategory(req: Request, res: Response){
-        const { category } = req.body.parameters;   //Luego reviso si puedo poner ids yo o los tengo que robar
+        const { category } = req.body;   //Luego reviso si puedo poner ids yo o los tengo que robar
         Restaurant.find({ category: category }).then((restaurantList: RestaurantType[] | undefined) => {
             if(restaurantList) {
                 res.send(restaurantList)
@@ -40,7 +40,7 @@ class RestaurantsControllers {
 
     //Crear un nuevo establecimiento
     createRestaurant(req: Request, res: Response){
-        const { name, rating, description, category, location, menu} = req.body.parameters;
+        const { name, rating, description, category, location, menu} = req.body;
         const newRestaurant = new Restaurant({ name, rating, description, category, location, menu });
         newRestaurant.save().then((restaurant: RestaurantType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(restaurant);
@@ -51,7 +51,7 @@ class RestaurantsControllers {
 
     //Borrar un restaurant de la base
     deleteRestaurant(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         Restaurant.findOneAndDelete({ _id: _id }).then((deletedRestaurant: RestaurantType | null) => {
             if (deletedRestaurant) {
                 res.send({ message: "Restaurant eliminado correctamente" });
@@ -65,7 +65,7 @@ class RestaurantsControllers {
 
     //Actualizar un negocio ya existente
     updateRestaurant(req: Request, res: Response){
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         const updateRestaurant = req.body.update;
         Restaurant.findOneAndUpdate({ _id: _id }, updateRestaurant, { new: true }).then((updatedRestaurant: RestaurantType | undefined) => {
             if (updatedRestaurant) {
