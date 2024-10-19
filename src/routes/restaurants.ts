@@ -14,6 +14,8 @@ const router = Router();
  *   responses: 
  *    200:
  *     description: Successful
+ *    500:
+ *     description: Error in connection
  */
 router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
 
@@ -51,6 +53,10 @@ router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    500:
+ *     description: Error in connection
  */
 router.post('', restaurantsController.createRestaurant); // Crear un nuevo restaurante
 
@@ -76,6 +82,12 @@ router.post('', restaurantsController.createRestaurant); // Crear un nuevo resta
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaurante
 
@@ -118,6 +130,12 @@ router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaura
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.put('', restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
@@ -143,6 +161,12 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 
@@ -168,6 +192,12 @@ router.post('/info', checkParameters(['_id']), restaurantsController.getRestaura
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
 

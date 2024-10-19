@@ -32,6 +32,12 @@ const router = Router()
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/login', checkParameters(['email', 'password']), emailInUse(false), checkPassword(), sessionController.getUser);
 // getUser (Login) by email & password (POST for more security)
@@ -64,6 +70,10 @@ router.post('/login', checkParameters(['email', 'password']), emailInUse(false),
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters or Email is already in use
+ *    500:
+ *     description: Error in connection
  */
 router.post('/register', checkParameters(['email', 'name', 'password']), emailInUse(true), sessionController.createUser);
 // createUser (Register) by name, email & password 

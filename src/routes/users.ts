@@ -13,6 +13,8 @@ const router = Router()
  *   responses: 
  *    200:
  *     description: Successful
+ *    500:
+ *     description: Error in connection
  */
 router.get('', usersControllers.getAll);
 
@@ -57,6 +59,12 @@ router.get('', usersControllers.getAll);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.put('/config', usersControllers.updateUser);
 
@@ -82,6 +90,12 @@ router.put('/config', usersControllers.updateUser);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.delete('/config', usersControllers.deleteUser);
 

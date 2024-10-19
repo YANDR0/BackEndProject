@@ -13,6 +13,8 @@ const router = Router();
  *   responses: 
  *    200:
  *     description: Successful
+ *    500:
+ *     description: Error in connection
  */
 router.get('', listController.getAll);
 
@@ -45,6 +47,10 @@ router.get('', listController.getAll);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    500:
+ *     description: Error in connection
  */
 router.post('', listController.createListElement); 
 
@@ -70,6 +76,12 @@ router.post('', listController.createListElement);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.delete('', listController.deleteListElement); 
 
@@ -109,6 +121,12 @@ router.delete('', listController.deleteListElement);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.put('', listController.updateListElement); 
 
@@ -134,6 +152,12 @@ router.put('', listController.updateListElement);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/user', listController.getUserList); 
 
@@ -159,6 +183,12 @@ router.post('/user', listController.getUserList);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/restaurant', listController.getRestaurantList); 
 

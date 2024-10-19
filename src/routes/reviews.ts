@@ -13,6 +13,8 @@ const router = Router()
  *   responses: 
  *    200:
  *     description: Successful
+ *    500:
+ *     description: Error in connection
  */
 router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
 
@@ -49,6 +51,10 @@ router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    500:
+ *     description: Error in connection
  */
 router.post('', reviewsControllers.createReview); // Crear una nueva reseña
 
@@ -74,6 +80,12 @@ router.post('', reviewsControllers.createReview); // Crear una nueva reseña
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
 
@@ -112,6 +124,12 @@ router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.put('', reviewsControllers.updateReview); // Actualizar una reseña existente
 
@@ -137,6 +155,12 @@ router.put('', reviewsControllers.updateReview); // Actualizar una reseña exist
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/restaurant', reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
 

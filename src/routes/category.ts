@@ -13,6 +13,8 @@ const router = Router();
  *   responses: 
  *    200:
  *     description: Successful
+ *    500:
+ *     description: Error in connection
  */
 router.get('', categoryController.getAll);
 
@@ -41,6 +43,10 @@ router.get('', categoryController.getAll);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    500:
+ *     description: Error in connection
  */
 router.post('', categoryController.createCategory);
 
@@ -66,6 +72,12 @@ router.post('', categoryController.createCategory);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.delete('', categoryController.deleteCategory);
 
@@ -98,6 +110,12 @@ router.delete('', categoryController.deleteCategory);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.put('', categoryController.updateCategory)
 
@@ -125,6 +143,12 @@ router.put('', categoryController.updateCategory)
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/id', categoryController.getCategories);
 
@@ -150,6 +174,12 @@ router.post('/id', categoryController.getCategories);
  *   responses: 
  *    200:
  *     description: Successful
+ *    400:
+ *     description: Missing parameters
+ *    404: 
+ *     description: Element do not exist in database
+ *    500:
+ *     description: Error in connection
  */
 router.post('/type', categoryController.getCategoriesByType);
 
