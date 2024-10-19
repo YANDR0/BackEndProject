@@ -4,11 +4,76 @@ import controllers from "../controllers/index";
 const listController = controllers.listControllers;
 const router = Router();
 
-router.get('', listController.getAll); // Obtener todas las listas
-router.post('', listController.createListElement); // Crear un elemento en la lista
-router.delete('', listController.deleteListElement); // Eliminar un elemento de la lista
-router.put('', listController.updateListElement); // Actualizar un elemento existente en la lista
-router.post('/user', listController.getUserList); // Obtener la lista de restaurantes de un usuario
-router.post('/restaurant', listController.getRestaurantList); // Obtener la información de listas de un restaurante
+/**
+ * @swagger
+ * /list:
+ *  get:
+ *   tags: [List]
+ *   description: Get all elements from all lists
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('', listController.getAll);
+
+/**
+ * @swagger
+ * /list:
+ *  post:
+ *   tags: [List]
+ *   description: Generate new element for the lists
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.post('', listController.createListElement); 
+
+/**
+ * @swagger
+ * /list:
+ *  delete:
+ *   tags: [List]
+ *   description: Delete element from the lists
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.delete('', listController.deleteListElement); 
+
+/**
+ * @swagger
+ * /list:
+ *  put:
+ *   tags: [List]
+ *   description: Update element from the lists
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.put('', listController.updateListElement); 
+
+/**
+ * @swagger
+ * /list/user:
+ *  get:
+ *   tags: [List]
+ *   description: Get the list from a specific user
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/user', listController.getUserList); 
+
+/**
+ * @swagger
+ * /list/restaurant:
+ *  get:
+ *   tags: [List]
+ *   description: Get all data from a restaurant
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/restaurant', listController.getRestaurantList); 
 
 export default router;

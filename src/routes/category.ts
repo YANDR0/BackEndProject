@@ -4,11 +4,76 @@ import controllers from "../controllers/index";
 const categoryController = controllers.categoryControllers;
 const router = Router();
 
-router.get('', categoryController.getAll); // Obtener todas las categorias
-router.post('/', categoryController.createCategory); // Crear una nueva categoría
-router.delete('/', categoryController.deleteCategory); // Eliminar una categoría existente
-router.put('/', categoryController.updateCategory) // Actualizar una categoría existente
-router.post('/id', categoryController.getCategories); // Obtener categorías por su ID
-router.post('/type', categoryController.getCategoriesByType); // Obtener categorías por tipo
+/**
+ * @swagger
+ * /category:
+ *  get:
+ *   tags: [Category]
+ *   description: Get all categorys
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('', categoryController.getAll);
+
+/**
+ * @swagger
+ * /category:
+ *  post:
+ *   tags: [Category]
+ *   description: Create a new category
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.post('', categoryController.createCategory);
+
+/**
+ * @swagger
+ * /category:
+ *  delete:
+ *   tags: [Category]
+ *   description: Delete a category
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.delete('', categoryController.deleteCategory);
+
+/**
+ * @swagger
+ * /category:
+ *  put:
+ *   tags: [Category]
+ *   description: Update a category
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.put('', categoryController.updateCategory)
+
+/**
+ * @swagger
+ * /category/id:
+ *  get:
+ *   tags: [Category]
+ *   description: Get all categorys with an specific id
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/id', categoryController.getCategories);
+
+/**
+ * @swagger
+ * /category/type:
+ *  get:
+ *   tags: [Category]
+ *   description: Get all categorys with an specific type
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/type', categoryController.getCategoriesByType);
 
 export default router;

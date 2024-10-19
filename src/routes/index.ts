@@ -26,7 +26,6 @@ router.use('/session', sessionRoutes);
 router.use('/user', usersRoutes);
 router.use('/restaurant', restaurantsRoutes);
 
-
 router.use('/reviews', reviewsRoutes);  
 router.use('/list', listRoutes);   
 router.use('/category', categoryRoutes);

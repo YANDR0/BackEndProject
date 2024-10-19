@@ -4,11 +4,76 @@ import controllers from "../controllers/index";
 const restaurantsController = controllers.restaurantsController;
 const router = Router();
 
+/**
+ * @swagger
+ * /restaurant:
+ *  get:
+ *   tags: [Restaurant]
+ *   description: Get all the restaurants
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
 router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
+
+/**
+ * @swagger
+ * /restaurant:
+ *  post:
+ *   tags: [Restaurant]
+ *   description: Generate a new restaurant
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
 router.post('', restaurantsController.createRestaurant); // Crear un nuevo restaurante
+
+/**
+ * @swagger
+ * /restaurant:
+ *  delete:
+ *   tags: [Restaurant]
+ *   description: Delete existing restaurant
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
 router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaurante
+
+/**
+ * @swagger
+ * /restaurant:
+ *  put:
+ *   tags: [Restaurant]
+ *   description: Update existing restaurant
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
 router.put('', restaurantsController.updateRestaurant); // Actualizar un restaurante existente
-router.post('/info', restaurantsController.getRestaurants); // Obtener la información de un restaurante
-router.post('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
+
+/**
+ * @swagger
+ * /restaurant/info:
+ *  get:
+ *   tags: [Restaurant]
+ *   description: Get information from one specific restaurant
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/info', restaurantsController.getRestaurants); // Obtener la información de un restaurante
+
+/**
+ * @swagger
+ * /restaurant/category:
+ *  get:
+ *   tags: [Restaurant]
+ *   description: Get all restaurants with the same category
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
 
 export default router;

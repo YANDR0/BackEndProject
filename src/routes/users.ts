@@ -4,8 +4,40 @@ import controllers from "../controllers/index";
 const usersControllers = controllers.usersController;
 const router = Router()
 
-router.get('', usersControllers.getAll); // Obtener todos los usuarios
-router.put('/config', usersControllers.updateUser); // updateUser (Edit) by all user data
-router.delete('/config', usersControllers.deleteUser); // deleteUser (Delete) by email
+/**
+ * @swagger
+ * /user:
+ *  get:
+ *   tags: [User]
+ *   description: Get all users
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.get('', usersControllers.getAll);
+
+/**
+ * @swagger
+ * /user/config:
+ *  put:
+ *   tags: [User]
+ *   description: Update user
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.put('/config', usersControllers.updateUser);
+
+/**
+ * @swagger
+ * /user/config:
+ *  delete:
+ *   tags: [User]
+ *   description: Delete user
+ *   responses: 
+ *    200:
+ *     description: api successful yei
+ */
+router.delete('/config', usersControllers.deleteUser);
 
 export default router;
