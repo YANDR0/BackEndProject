@@ -10,9 +10,6 @@ const router = Router()
  *  get:
  *   tags: [Reviews]
  *   description: Get all the reviews
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
 
@@ -22,9 +19,30 @@ router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
  *  post:
  *   tags: [Reviews]
  *   description: Generate a new review
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - userId
+ *        - restaurantId
+ *        - content
+ *        - score
+ *       properties:
+ *        userId: 
+ *         type: string
+ *        restaurantId: 
+ *         type: string
+ *        score:
+ *         type: number
+ *        content:
+ *         type: string
+ *        priority:
+ *         type: number
  */
 router.post('', reviewsControllers.createReview); // Crear una nueva reseña
 
@@ -34,9 +52,19 @@ router.post('', reviewsControllers.createReview); // Crear una nueva reseña
  *  delete:
  *   tags: [Reviews]
  *   description: Delete a existing review
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  */
 router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
 
@@ -46,22 +74,55 @@ router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
  *  put:
  *   tags: [Reviews]
  *   description: Update an existing review
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
+ *        updatedData:
+ *         type: object
+ *         properties: 
+ *          userId: 
+ *           type: string
+ *          restaurantId: 
+ *           type: string
+ *          score:
+ *           type: number
+ *          content:
+ *           type: string
+ *          priority:
+ *           type: number
  */
 router.put('', reviewsControllers.updateReview); // Actualizar una reseña existente
 
 /**
  * @swagger
  * /reviews/restaurant:
- *  get:
+ *  post:
  *   tags: [Reviews]
  *   description: Get all the reviews from specific restaurant
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - restaurantId
+ *       properties:
+ *        restaurantId:
+ *         type: string
  */
-router.get('/restaurant', reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
+router.post('/restaurant', reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
 
 export default router;

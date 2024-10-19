@@ -28,7 +28,7 @@ class RestaurantsControllers {
     
     //Obtener todos los restaurantes de una categoría (Igual podemos dejarlo usar más filtros)
     getRestaurantsByCategory(req: Request, res: Response){
-        const { category } = req.body;   //Luego reviso si puedo poner ids yo o los tengo que robar
+        const { category } = req.body; 
         Restaurant.find({ category: category }).then((restaurantList: RestaurantType[] | undefined) => {
             if(restaurantList) {
                 res.send(restaurantList)

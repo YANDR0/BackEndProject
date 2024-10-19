@@ -10,9 +10,6 @@ const router = Router()
  *  get:
  *   tags: [User]
  *   description: Get all users
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.get('', usersControllers.getAll);
 
@@ -22,9 +19,38 @@ router.get('', usersControllers.getAll);
  *  put:
  *   tags: [User]
  *   description: Update user
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
+ *        updatedData:
+ *         type: object
+ *         properties: 
+ *          name: 
+ *           type: string
+ *          email: 
+ *           type: string
+ *          password:
+ *           type: string
+ *          role: 
+ *           type: number
+ *          location:
+ *           type: string
+ *          biography:
+ *           type: string
+ *          image: 
+ *           type: string
+ *          status:
+ *           type: numbers
  */
 router.put('/config', usersControllers.updateUser);
 
@@ -34,9 +60,19 @@ router.put('/config', usersControllers.updateUser);
  *  delete:
  *   tags: [User]
  *   description: Delete user
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  */
 router.delete('/config', usersControllers.deleteUser);
 

@@ -5,7 +5,7 @@ const userSchema = new Schema({
     name: { type: SchemaTypes.String, required: true },
     email: { type: SchemaTypes.String, required: true },
     password: { type: SchemaTypes.String },
-    role: { type: SchemaTypes.String, default: 'user' },
+    role: { type: SchemaTypes.Number, default: 1 },
     location: { type: SchemaTypes.String }, //0=Zapopan, 1=Guadalajara, 2=Tlaquepaque, etc etc o el lugar también :v
     biography: { type: SchemaTypes.String },
     image: { type: SchemaTypes.String },

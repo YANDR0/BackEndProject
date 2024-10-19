@@ -15,9 +15,10 @@ const router = Router()
  *   description: Login with password and email
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
@@ -26,11 +27,8 @@ const router = Router()
  *       properties:
  *        email:
  *         type: string
- *        password:
+ *        password: 
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.post('/login', checkParameters(['email', 'password']), emailInUse(false), checkPassword(), sessionController.getUser);
 // getUser (Login) by email & password (POST for more security)
@@ -43,9 +41,10 @@ router.post('/login', checkParameters(['email', 'password']), emailInUse(false),
  *   description: Register as a new user
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
@@ -55,13 +54,10 @@ router.post('/login', checkParameters(['email', 'password']), emailInUse(false),
  *       properties:
  *        email:
  *         type: string
- *        password:
+ *        password: 
  *         type: string
- *        name:
+ *        name: 
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.post('/register', checkParameters(['email', 'name', 'password']), emailInUse(true), sessionController.createUser);
 // createUser (Register) by name, email & password 

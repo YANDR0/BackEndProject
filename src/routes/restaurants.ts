@@ -11,9 +11,31 @@ const router = Router();
  *  get:
  *   tags: [Restaurant]
  *   description: Get all the restaurants
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - name
+ *       properties:
+ *        name: 
+ *         type: string
+ *        rating: 
+ *         type: number
+ *        description:
+ *         type: string
+ *        category:
+ *         type: array
+ *         items:
+ *          type: string
+ *        location:
+ *         type: string
+ *        menu:
+ *         type: string
  */
 router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
 
@@ -23,9 +45,6 @@ router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
  *  post:
  *   tags: [Restaurant]
  *   description: Generate a new restaurant
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.post('', restaurantsController.createRestaurant); // Crear un nuevo restaurante
 
@@ -35,9 +54,19 @@ router.post('', restaurantsController.createRestaurant); // Crear un nuevo resta
  *  delete:
  *   tags: [Restaurant]
  *   description: Delete existing restaurant
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  */
 router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaurante
 
@@ -47,9 +76,36 @@ router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaura
  *  put:
  *   tags: [Restaurant]
  *   description: Update existing restaurant
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
+ *        updatedData:
+ *         type: object
+ *         properties: 
+ *          name: 
+ *           type: string
+ *          rating: 
+ *           type: number
+ *          description:
+ *           type: string
+ *          category:
+ *           type: array
+ *           items:
+ *            type: string
+ *          location:
+ *           type: string
+ *          menu:
+ *           type: string
  */
 router.put('', restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
@@ -73,18 +129,28 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
  *        _id:
  *         type: string
  */
-router.get('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
+router.post('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 
 /**
  * @swagger
  * /restaurant/category:
- *  get:
+ *  post:
  *   tags: [Restaurant]
  *   description: Get all restaurants with the same category
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - category
+ *       properties:
+ *        category:
+ *         type: string
  */
-router.get('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
+router.post('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
 
 export default router;

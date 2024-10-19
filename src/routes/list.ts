@@ -126,7 +126,7 @@ router.post('/user', listController.getUserList);
 /**
  * @swagger
  * /list/restaurant:
- *  get:
+ *  post:
  *   tags: [List]
  *   description: Get all data from a restaurant
  *   consumes:
@@ -143,6 +143,6 @@ router.post('/user', listController.getUserList);
  *        restaurantId:
  *         type: string
  */
-router.get('/restaurant', listController.getRestaurantList); 
+router.post('/restaurant', listController.getRestaurantList); 
 
 export default router;
