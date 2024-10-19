@@ -29,6 +29,9 @@ const router = Router()
  *         type: string
  *        password: 
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/login', checkParameters(['email', 'password']), emailInUse(false), checkPassword(), sessionController.getUser);
 // getUser (Login) by email & password (POST for more security)
@@ -58,6 +61,9 @@ router.post('/login', checkParameters(['email', 'password']), emailInUse(false),
  *         type: string
  *        name: 
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/register', checkParameters(['email', 'name', 'password']), emailInUse(true), sessionController.createUser);
 // createUser (Register) by name, email & password 

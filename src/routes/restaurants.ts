@@ -11,6 +11,18 @@ const router = Router();
  *  get:
  *   tags: [Restaurant]
  *   description: Get all the restaurants
+ *   responses: 
+ *    200:
+ *     description: Successful
+ */
+router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
+
+/**
+ * @swagger
+ * /restaurant:
+ *  post:
+ *   tags: [Restaurant]
+ *   description: Generate a new restaurant
  *   consumes:
  *    - application/json
  *   requestBody:
@@ -36,15 +48,9 @@ const router = Router();
  *         type: string
  *        menu:
  *         type: string
- */
-router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
-
-/**
- * @swagger
- * /restaurant:
- *  post:
- *   tags: [Restaurant]
- *   description: Generate a new restaurant
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('', restaurantsController.createRestaurant); // Crear un nuevo restaurante
 
@@ -67,6 +73,9 @@ router.post('', restaurantsController.createRestaurant); // Crear un nuevo resta
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaurante
 
@@ -106,6 +115,9 @@ router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaura
  *           type: string
  *          menu:
  *           type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.put('', restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
@@ -128,6 +140,9 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 
@@ -150,6 +165,9 @@ router.post('/info', checkParameters(['_id']), restaurantsController.getRestaura
  *       properties:
  *        category:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
 

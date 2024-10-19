@@ -10,6 +10,9 @@ const router = Router()
  *  get:
  *   tags: [User]
  *   description: Get all users
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.get('', usersControllers.getAll);
 
@@ -51,6 +54,9 @@ router.get('', usersControllers.getAll);
  *           type: string
  *          status:
  *           type: numbers
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.put('/config', usersControllers.updateUser);
 
@@ -73,6 +79,9 @@ router.put('/config', usersControllers.updateUser);
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.delete('/config', usersControllers.deleteUser);
 

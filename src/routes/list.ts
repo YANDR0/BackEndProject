@@ -10,6 +10,9 @@ const router = Router();
  *  get:
  *   tags: [List]
  *   description: Get all elements from all lists
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.get('', listController.getAll);
 
@@ -39,6 +42,9 @@ router.get('', listController.getAll);
  *         type: string
  *        score: 
  *         type: number
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('', listController.createListElement); 
 
@@ -48,7 +54,6 @@ router.post('', listController.createListElement);
  *  delete:
  *   tags: [List]
  *   description: Delete element from the lists
- *   responses: 
  *   consumes:
  *    - application/json
  *   requestBody:
@@ -62,6 +67,9 @@ router.post('', listController.createListElement);
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.delete('', listController.deleteListElement); 
 
@@ -98,6 +106,9 @@ router.delete('', listController.deleteListElement);
  *           type: string
  *          score: 
  *           type: number
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.put('', listController.updateListElement); 
 
@@ -120,6 +131,9 @@ router.put('', listController.updateListElement);
  *       properties:
  *        userId:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/user', listController.getUserList); 
 
@@ -142,6 +156,9 @@ router.post('/user', listController.getUserList);
  *       properties:
  *        restaurantId:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/restaurant', listController.getRestaurantList); 
 

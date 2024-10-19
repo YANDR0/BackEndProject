@@ -10,6 +10,9 @@ const router = Router()
  *  get:
  *   tags: [Reviews]
  *   description: Get all the reviews
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
 
@@ -43,6 +46,9 @@ router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
  *         type: string
  *        priority:
  *         type: number
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('', reviewsControllers.createReview); // Crear una nueva reseña
 
@@ -65,6 +71,9 @@ router.post('', reviewsControllers.createReview); // Crear una nueva reseña
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
 
@@ -100,6 +109,9 @@ router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
  *           type: string
  *          priority:
  *           type: number
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.put('', reviewsControllers.updateReview); // Actualizar una reseña existente
 
@@ -122,6 +134,9 @@ router.put('', reviewsControllers.updateReview); // Actualizar una reseña exist
  *       properties:
  *        restaurantId:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/restaurant', reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
 

@@ -10,6 +10,9 @@ const router = Router();
  *  get:
  *   tags: [Category]
  *   description: Get all categorys
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.get('', categoryController.getAll);
 
@@ -35,6 +38,9 @@ router.get('', categoryController.getAll);
  *         type: string
  *        type: 
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('', categoryController.createCategory);
 
@@ -57,6 +63,9 @@ router.post('', categoryController.createCategory);
  *       properties:
  *        _id:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.delete('', categoryController.deleteCategory);
 
@@ -86,6 +95,9 @@ router.delete('', categoryController.deleteCategory);
  *           type: string
  *          type: 
  *           type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.put('', categoryController.updateCategory)
 
@@ -110,6 +122,9 @@ router.put('', categoryController.updateCategory)
  *         type: array
  *         items:
  *          type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/id', categoryController.getCategories);
 
@@ -132,6 +147,9 @@ router.post('/id', categoryController.getCategories);
  *       properties:
  *        type:
  *         type: string
+ *   responses: 
+ *    200:
+ *     description: Successful
  */
 router.post('/type', categoryController.getCategoriesByType);
 
