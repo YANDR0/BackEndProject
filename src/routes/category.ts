@@ -22,6 +22,21 @@ router.get('', categoryController.getAll);
  *  post:
  *   tags: [Category]
  *   description: Create a new category
+ *   consumes:
+ *    - application/json
+ *   parameters:
+ *    - in: body
+ *      name: parameters
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - category
+ *        - type
+ *       properties:
+ *        category:
+ *         type: string
+ *        type:
+ *         type: string
  *   responses: 
  *    200:
  *     description: api successful yei
