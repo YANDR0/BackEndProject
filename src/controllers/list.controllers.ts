@@ -17,7 +17,7 @@ class ListControllers {
 
     //Obtener la lista de restaurantes de un usuario
     getUserList(req: Request, res: Response){
-        const { userId } = req.body;
+        const { userId } = req.body.parameters;
         ListElement.find({ userId: userId }).then((list: ListType[] | undefined) => {
             if(list) {
                 res.send(list)
@@ -29,7 +29,7 @@ class ListControllers {
 
     //Obtener la información de listas de un restaurante
     getRestaurantList(req: Request, res: Response){
-        const { restaurantId } = req.body;
+        const { restaurantId } = req.body.parameters;
         ListElement.find({ restaurantId: restaurantId }).then((list: ListType[] | undefined) => {
             if(list) {
                 res.send(list)
@@ -41,7 +41,7 @@ class ListControllers {
 
     //Crear un elemento en base a un usuario y un restaurant existente
     createListElement(req: Request, res: Response){
-        const { userId, restaurantId, category, score } = req.body;
+        const { userId, restaurantId, category, score } = req.body.parameters;
         const newReview = new ListElement({ userId, restaurantId, category, score});
         newReview.save().then((listElement: ListType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(listElement);
@@ -52,7 +52,7 @@ class ListControllers {
 
     //Borra el elemento de la lista de un usuario
     deleteListElement(req: Request, res: Response){
-        const { _id } = req.body;
+        const { _id } = req.body.parameters;
         ListElement.findOneAndDelete({ _id: _id }).then((deletedElement: ListType | null) => {
             if (deletedElement) {
                 res.send({ message: "Entrada eliminada correctamente" });
@@ -66,8 +66,8 @@ class ListControllers {
 
     //Actualiza el dato de un elemento existente
     updateListElement(req: Request, res: Response){
-        const { _id } = req.body;  
-        const updateListElement = req.body;
+        const { _id } = req.body.parameters;  
+        const updateListElement = req.body.update;
         ListElement.findOneAndUpdate({ _id: _id }, updateListElement, { new: true }).then((updatedList: ListType | undefined) => {
             if (updatedList) {
                 res.send(updatedList);

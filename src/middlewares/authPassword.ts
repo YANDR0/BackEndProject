@@ -9,7 +9,7 @@ export  function checkPassword(){
 
         const passDataBase = req.body.currUser.password;
         try {
-            const password = req.body.password;
+            const password = req.body.parameters.password;
             const comparation = await bcrypt.compare(password, passDataBase)
             if(comparation) return next();      
             res.sendStatus(HTTP_STATUS_CODES.BAD_REQUEST);

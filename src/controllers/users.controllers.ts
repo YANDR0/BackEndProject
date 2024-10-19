@@ -13,10 +13,10 @@ class UsersControllers {
         });
     }
 
-    // Obtener un solo usuario por email y password
+    // Obtener un solo usuario por _id
     getUser(req: Request, res: Response) {
-        const { email, password } = req.body;
-        User.findOne({ email, password }).then((user: UserType | undefined) => {
+        const { _id } = req.body.parameters;
+        User.findOne({ _id }).then((user: UserType | undefined) => {
             if (user) {
                 res.send(user);
             } else {
@@ -27,11 +27,11 @@ class UsersControllers {
         });
     }
 
-    // Actualizar un usuario por email (se actualiza toda la info basada en el email)
+    // Actualizar un usuario por id
     updateUser(req: Request, res: Response) {
-        const { email } = req.body;  // Obtener email del usuario a actualizar
-        const updateData = req.body; // Toda la info del usuario
-        User.findOneAndUpdate({ email }, updateData, { new: true }).then((updatedUser: UserType | undefined) => {
+        const { _id } = req.body.parameters;  // Obtener id del usuario a actualizar
+        const updateData = req.body.update; // Toda la info del usuario
+        User.findOneAndUpdate({ _id }, updateData, { new: true }).then((updatedUser: UserType | undefined) => {
             if (updatedUser) {
                 res.send(updatedUser);
             } else {
@@ -42,10 +42,10 @@ class UsersControllers {
         });
     }
 
-    // Eliminar un usuario por email
+    // Eliminar un usuario por id
     deleteUser(req: Request, res: Response) {
-        const { email } = req.body;
-        User.findOneAndDelete({ email }).then((deletedUser: UserType | null) => {
+        const { _id } = req.body.parameters;
+        User.findOneAndDelete({ _id }).then((deletedUser: UserType | null) => {
             if (deletedUser) {
                 res.send({ message: "Usuario eliminado correctamente" });
             } else {

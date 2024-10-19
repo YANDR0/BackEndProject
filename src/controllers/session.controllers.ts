@@ -8,7 +8,7 @@ class SessionControllers {
     
     // Obtener un solo usuario por email y password
     getUser(req: Request, res: Response) {
-        const { email, password } = req.body;
+        const { email, password } = req.body.parameters;
 
         User.findOne({ email, password }).then((user: UserType | undefined) => {
             if (user) {
@@ -23,8 +23,8 @@ class SessionControllers {
 
     // Crear un usuario nuevo (solo con email, username y password)
     async createUser(req: Request, res: Response) {
-        const password = await bcrypt.hash(req.body.password, 10);
-        const { email, name } = req.body;
+        const password = await bcrypt.hash(req.body.parameters.password, 10);
+        const { email, name } = req.body.parameters;
         const newUser = new User({ email, name, password });
 
         newUser.save().then((user: UserType) => {
