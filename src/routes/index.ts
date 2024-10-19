@@ -16,7 +16,7 @@ const router = Router();
  *   description: Home endpoint
  *   responses: 
  *    200:
- *     description: api successful yei
+ *     description: Api successful yei
  */
 router.get('', (req, res) => {
     res.send('Api works!')

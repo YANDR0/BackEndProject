@@ -65,9 +65,8 @@ class RestaurantsControllers {
 
     //Actualizar un negocio ya existente
     updateRestaurant(req: Request, res: Response){
-        const { _id } = req.body;
-        const updateRestaurant = req.body.update;
-        Restaurant.findOneAndUpdate({ _id: _id }, updateRestaurant, { new: true }).then((updatedRestaurant: RestaurantType | undefined) => {
+        const { _id, updatedData } = req.body;
+        Restaurant.findOneAndUpdate({ _id: _id }, updatedData, { new: true }).then((updatedRestaurant: RestaurantType | undefined) => {
             if (updatedRestaurant) {
                 res.send(updatedRestaurant);
             } else {

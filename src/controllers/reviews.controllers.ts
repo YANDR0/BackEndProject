@@ -54,9 +54,8 @@ class ReviewsControllers {
 
     //Actualizar una review ya existente
     updateReview(req: Request, res: Response){
-        const { _id } = req.body;
-        const updateReview = req.body.update;
-        Review.findOneAndUpdate({ _id: _id }, updateReview, { new: true }).then((updatedReview: ReviewType | undefined) => {
+        const { _id, updatedData } = req.body;
+        Review.findOneAndUpdate({ _id: _id }, updatedData, { new: true }).then((updatedReview: ReviewType | undefined) => {
             if (updatedReview) {
                 res.send(updatedReview);
             } else {

@@ -66,9 +66,8 @@ class ListControllers {
 
     //Actualiza el dato de un elemento existente
     updateListElement(req: Request, res: Response){
-        const { _id } = req.body;  
-        const updateListElement = req.body.update;
-        ListElement.findOneAndUpdate({ _id: _id }, updateListElement, { new: true }).then((updatedList: ListType | undefined) => {
+        const { _id, updatedData } = req.body;  
+        ListElement.findOneAndUpdate({ _id: _id }, updatedData, { new: true }).then((updatedList: ListType | undefined) => {
             if (updatedList) {
                 res.send(updatedList);
             } else {

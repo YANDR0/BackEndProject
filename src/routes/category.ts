@@ -10,9 +10,6 @@ const router = Router();
  *  get:
  *   tags: [Category]
  *   description: Get all categorys
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.get('', categoryController.getAll);
 
@@ -24,9 +21,10 @@ router.get('', categoryController.getAll);
  *   description: Create a new category
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
@@ -35,11 +33,8 @@ router.get('', categoryController.getAll);
  *       properties:
  *        category:
  *         type: string
- *        type:
+ *        type: 
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.post('', categoryController.createCategory);
 
@@ -51,9 +46,10 @@ router.post('', categoryController.createCategory);
  *   description: Delete a category
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
@@ -61,9 +57,6 @@ router.post('', categoryController.createCategory);
  *       properties:
  *        _id:
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.delete('', categoryController.deleteCategory);
 
@@ -75,9 +68,10 @@ router.delete('', categoryController.deleteCategory);
  *   description: Update a category
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
@@ -85,46 +79,60 @@ router.delete('', categoryController.deleteCategory);
  *       properties:
  *        _id:
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
+ *        updatedData:
+ *         type: object
+ *         properties: 
+ *          category: 
+ *           type: string
+ *          type: 
+ *           type: string
  */
 router.put('', categoryController.updateCategory)
 
 /**
  * @swagger
  * /category/id:
- *  get:
+ *  post:
  *   tags: [Category]
  *   description: Get all categorys with an specific id
  *   consumes:
  *    - application/json
- *   parameters:
- *    - in: body
- *      name: parameters
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
  *      schema:
  *       type: object
  *       required: 
- *        - _id
+ *        - idList
  *       properties:
- *        _id:
- *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
+ *        idList:
+ *         type: array
+ *         items:
+ *          type: string
  */
-router.get('/id', categoryController.getCategories);
+router.post('/id', categoryController.getCategories);
 
 /**
  * @swagger
  * /category/type:
- *  get:
+ *  post:
  *   tags: [Category]
  *   description: Get all categorys with an specific type
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - type
+ *       properties:
+ *        type:
+ *         type: string
  */
-router.get('/type', categoryController.getCategoriesByType);
+router.post('/type', categoryController.getCategoriesByType);
 
 export default router;

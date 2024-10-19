@@ -10,9 +10,6 @@ const router = Router();
  *  get:
  *   tags: [List]
  *   description: Get all elements from all lists
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.get('', listController.getAll);
 
@@ -22,9 +19,26 @@ router.get('', listController.getAll);
  *  post:
  *   tags: [List]
  *   description: Generate new element for the lists
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - userId
+ *        - restaurantId
+ *       properties:
+ *        userId:
+ *         type: string
+ *        restaurantId:
+ *         type: string
+ *        category:
+ *         type: string
+ *        score: 
+ *         type: number
  */
 router.post('', listController.createListElement); 
 
@@ -35,8 +49,19 @@ router.post('', listController.createListElement);
  *   tags: [List]
  *   description: Delete element from the lists
  *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
  */
 router.delete('', listController.deleteListElement); 
 
@@ -46,23 +71,57 @@ router.delete('', listController.deleteListElement);
  *  put:
  *   tags: [List]
  *   description: Update element from the lists
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - _id
+ *       properties:
+ *        _id:
+ *         type: string
+ *        updatedData:
+ *         type: object
+ *         required:
+ *          - userId
+ *          - restaurantId
+ *         properties: 
+ *          userId: 
+ *           type: string
+ *          restaurantId: 
+ *           type: string
+ *          category:
+ *           type: string
+ *          score: 
+ *           type: number
  */
 router.put('', listController.updateListElement); 
 
 /**
  * @swagger
  * /list/user:
- *  get:
+ *  post:
  *   tags: [List]
  *   description: Get the list from a specific user
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - userId
+ *       properties:
+ *        userId:
+ *         type: string
  */
-router.get('/user', listController.getUserList); 
+router.post('/user', listController.getUserList); 
 
 /**
  * @swagger
@@ -70,9 +129,19 @@ router.get('/user', listController.getUserList);
  *  get:
  *   tags: [List]
  *   description: Get all data from a restaurant
- *   responses: 
- *    200:
- *     description: api successful yei
+ *   consumes:
+ *    - application/json
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required: 
+ *        - restaurantId
+ *       properties:
+ *        restaurantId:
+ *         type: string
  */
 router.get('/restaurant', listController.getRestaurantList); 
 

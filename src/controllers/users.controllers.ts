@@ -15,7 +15,7 @@ class UsersControllers {
 
     // Obtener un solo usuario por _id
     getUser(req: Request, res: Response) {
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         User.findOne({ _id }).then((user: UserType | undefined) => {
             if (user) {
                 res.send(user);
@@ -29,9 +29,8 @@ class UsersControllers {
 
     // Actualizar un usuario por id
     updateUser(req: Request, res: Response) {
-        const { _id } = req.body.parameters;  // Obtener id del usuario a actualizar
-        const updateData = req.body.update; // Toda la info del usuario
-        User.findOneAndUpdate({ _id }, updateData, { new: true }).then((updatedUser: UserType | undefined) => {
+        const { _id, updatedData } = req.body;  // Obtener id del usuario a actualizar
+        User.findOneAndUpdate({ _id }, updatedData, { new: true }).then((updatedUser: UserType | undefined) => {
             if (updatedUser) {
                 res.send(updatedUser);
             } else {
@@ -44,7 +43,7 @@ class UsersControllers {
 
     // Eliminar un usuario por id
     deleteUser(req: Request, res: Response) {
-        const { _id } = req.body.parameters;
+        const { _id } = req.body;
         User.findOneAndDelete({ _id }).then((deletedUser: UserType | null) => {
             if (deletedUser) {
                 res.send({ message: "Usuario eliminado correctamente" });

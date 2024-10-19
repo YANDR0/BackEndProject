@@ -72,9 +72,6 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
  *       properties:
  *        _id:
  *         type: string
- *   responses: 
- *    200:
- *     description: api successful yei
  */
 router.get('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 

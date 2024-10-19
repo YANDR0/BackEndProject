@@ -66,9 +66,8 @@ class CategoryControllers {
 
     //Actualizar datos de una categoría
     updateCategory(req: Request, res: Response){
-        const { _id } = req.body;  // Obtener email del usuario a actualizar
-        const updateData = req.body.update; // Toda la info del usuario
-        Category.findOneAndUpdate({ _id: _id }, updateData, { new: true }).then((updatedCategory: CategoryType | undefined) => {
+        const { _id, updatedData } = req.body;  // Obtener email del usuario a actualizar
+        Category.findOneAndUpdate({ _id: _id }, updatedData, { new: true }).then((updatedCategory: CategoryType | undefined) => {
             if (updatedCategory) {
                 res.send(updatedCategory);
             } else {
