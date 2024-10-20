@@ -1,5 +1,6 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
+import { authenticateToken } from "../middlewares/authToken";
 
 const reviewsControllers = controllers.reviewsControllers;
 const router = Router()
@@ -56,7 +57,7 @@ router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
  *    500:
  *     description: Error in connection
  */
-router.post('', reviewsControllers.createReview); // Crear una nueva reseña
+router.post('',  authenticateToken(), reviewsControllers.createReview); // Crear una nueva reseña
 
 /**
  * @swagger
@@ -87,7 +88,7 @@ router.post('', reviewsControllers.createReview); // Crear una nueva reseña
  *    500:
  *     description: Error in connection
  */
-router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
+router.delete('', authenticateToken(), reviewsControllers.deleteReview); // Borrar una reseña
 
 /**
  * @swagger
@@ -131,7 +132,7 @@ router.delete('', reviewsControllers.deleteReview); // Borrar una reseña
  *    500:
  *     description: Error in connection
  */
-router.put('', reviewsControllers.updateReview); // Actualizar una reseña existente
+router.put('', authenticateToken(), reviewsControllers.updateReview); // Actualizar una reseña existente
 
 /**
  * @swagger
@@ -162,6 +163,6 @@ router.put('', reviewsControllers.updateReview); // Actualizar una reseña exist
  *    500:
  *     description: Error in connection
  */
-router.post('/restaurant', reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
+router.post('/restaurant', authenticateToken(), reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
 
 export default router;

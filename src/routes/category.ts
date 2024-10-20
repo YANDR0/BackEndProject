@@ -1,5 +1,6 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
+import { authenticateToken } from "../middlewares/authToken";
 
 const categoryController = controllers.categoryControllers;
 const router = Router();
@@ -48,7 +49,7 @@ router.get('', categoryController.getAll);
  *    500:
  *     description: Error in connection
  */
-router.post('', categoryController.createCategory);
+router.post('', authenticateToken(), categoryController.createCategory);
 
 /**
  * @swagger
@@ -79,7 +80,7 @@ router.post('', categoryController.createCategory);
  *    500:
  *     description: Error in connection
  */
-router.delete('', categoryController.deleteCategory);
+router.delete('', authenticateToken(), categoryController.deleteCategory);
 
 /**
  * @swagger
@@ -117,7 +118,7 @@ router.delete('', categoryController.deleteCategory);
  *    500:
  *     description: Error in connection
  */
-router.put('', categoryController.updateCategory)
+router.put('', authenticateToken(), categoryController.updateCategory)
 
 /**
  * @swagger
@@ -150,7 +151,7 @@ router.put('', categoryController.updateCategory)
  *    500:
  *     description: Error in connection
  */
-router.post('/id', categoryController.getCategories);
+router.post('/id', authenticateToken(), categoryController.getCategories);
 
 /**
  * @swagger
@@ -181,6 +182,6 @@ router.post('/id', categoryController.getCategories);
  *    500:
  *     description: Error in connection
  */
-router.post('/type', categoryController.getCategoriesByType);
+router.post('/type', authenticateToken(), categoryController.getCategoriesByType);
 
 export default router;

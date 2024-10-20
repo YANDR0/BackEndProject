@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
 import { checkParameters } from "../middlewares/checkParameters";
+import { authenticateToken } from "../middlewares/authToken";
 import { emailInUse } from "../middlewares/emailInUse";
 import { checkPassword } from "../middlewares/authPassword";
 
@@ -39,7 +40,7 @@ const router = Router()
  *    500:
  *     description: Error in connection
  */
-router.post('/login', checkParameters(['email', 'password']), emailInUse(false), checkPassword(), sessionController.getUser);
+router.post('/login', checkParameters(['email', 'password']), emailInUse(false), checkPassword(), sessionController.login);
 // getUser (Login) by email & password (POST for more security)
 
 /**
@@ -75,7 +76,23 @@ router.post('/login', checkParameters(['email', 'password']), emailInUse(false),
  *    500:
  *     description: Error in connection
  */
-router.post('/register', checkParameters(['email', 'name', 'password']), emailInUse(true), sessionController.createUser);
+router.post('/register', checkParameters(['email', 'name', 'password']), emailInUse(true), sessionController.signUp);
 // createUser (Register) by name, email & password 
+
+/**
+ * @swagger
+ * /session/logout:
+ *  post:
+ *   tags: [Session]
+ *   description: Logout the current user
+ *   responses: 
+ *    200:
+ *     description: Successful logout
+ *    400:
+ *     description: No token provided
+ *    500:
+ *     description: Error in connection
+ */
+router.post('/logout', authenticateToken(), sessionController.logout);
 
 export default router;

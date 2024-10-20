@@ -1,5 +1,6 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
+import { authenticateToken } from "../middlewares/authToken";
 
 const listController = controllers.listControllers;
 const router = Router();
@@ -52,7 +53,7 @@ router.get('', listController.getAll);
  *    500:
  *     description: Error in connection
  */
-router.post('', listController.createListElement); 
+router.post('', authenticateToken(), listController.createListElement); 
 
 /**
  * @swagger
@@ -83,7 +84,7 @@ router.post('', listController.createListElement);
  *    500:
  *     description: Error in connection
  */
-router.delete('', listController.deleteListElement); 
+router.delete('', authenticateToken(), listController.deleteListElement); 
 
 /**
  * @swagger
@@ -128,7 +129,7 @@ router.delete('', listController.deleteListElement);
  *    500:
  *     description: Error in connection
  */
-router.put('', listController.updateListElement); 
+router.put('', authenticateToken(), listController.updateListElement); 
 
 /**
  * @swagger
@@ -159,7 +160,7 @@ router.put('', listController.updateListElement);
  *    500:
  *     description: Error in connection
  */
-router.post('/user', listController.getUserList); 
+router.post('/user', authenticateToken(), listController.getUserList); 
 
 /**
  * @swagger
@@ -190,6 +191,6 @@ router.post('/user', listController.getUserList);
  *    500:
  *     description: Error in connection
  */
-router.post('/restaurant', listController.getRestaurantList); 
+router.post('/restaurant', authenticateToken(), listController.getRestaurantList); 
 
 export default router;

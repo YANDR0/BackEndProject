@@ -1,5 +1,6 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
+import { authenticateToken } from "../middlewares/authToken";
 
 const usersControllers = controllers.usersController;
 const router = Router()
@@ -66,7 +67,7 @@ router.get('', usersControllers.getAll);
  *    500:
  *     description: Error in connection
  */
-router.put('/config', usersControllers.updateUser);
+router.put('/config', authenticateToken(), usersControllers.updateUser);
 
 /**
  * @swagger
@@ -97,6 +98,6 @@ router.put('/config', usersControllers.updateUser);
  *    500:
  *     description: Error in connection
  */
-router.delete('/config', usersControllers.deleteUser);
+router.delete('/config',  authenticateToken(), usersControllers.deleteUser);
 
 export default router;

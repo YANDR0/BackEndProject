@@ -1,6 +1,8 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
 import { checkParameters } from "../middlewares/checkParameters";
+import { authenticateToken } from "../middlewares/authToken";
+import { authenticateUserRole } from "../middlewares/authRoles";
 
 const restaurantsController = controllers.restaurantsController;
 const router = Router();
@@ -58,7 +60,7 @@ router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
  *    500:
  *     description: Error in connection
  */
-router.post('', restaurantsController.createRestaurant); // Crear un nuevo restaurante
+router.post('', authenticateToken(), authenticateUserRole(), restaurantsController.createRestaurant); // Crear un nuevo restaurante
 
 /**
  * @swagger
@@ -89,7 +91,7 @@ router.post('', restaurantsController.createRestaurant); // Crear un nuevo resta
  *    500:
  *     description: Error in connection
  */
-router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaurante
+router.delete('', authenticateToken(), restaurantsController.deleteRestaurant); // Borrar un restaurante
 
 /**
  * @swagger
@@ -137,7 +139,7 @@ router.delete('', restaurantsController.deleteRestaurant); // Borrar un restaura
  *    500:
  *     description: Error in connection
  */
-router.put('', restaurantsController.updateRestaurant); // Actualizar un restaurante existente
+router.put('', authenticateToken(), restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
 /**
  * @swagger
@@ -168,7 +170,7 @@ router.put('', restaurantsController.updateRestaurant); // Actualizar un restaur
  *    500:
  *     description: Error in connection
  */
-router.post('/info', checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
+router.post('/info', authenticateToken(), checkParameters(['_id']), restaurantsController.getRestaurants); // Obtener la información de un restaurante
 
 /**
  * @swagger
@@ -199,6 +201,6 @@ router.post('/info', checkParameters(['_id']), restaurantsController.getRestaura
  *    500:
  *     description: Error in connection
  */
-router.post('/category', restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
+router.post('/category', authenticateToken(), restaurantsController.getRestaurantsByCategory); // Obtener todos los restaurantes de una categoría
 
 export default router;
