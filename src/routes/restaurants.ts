@@ -91,7 +91,7 @@ router.post('', authenticateToken(), authenticateUserRole(), restaurantsControll
  *    500:
  *     description: Error in connection
  */
-router.delete('', authenticateToken(), restaurantsController.deleteRestaurant); // Borrar un restaurante
+router.delete('', authenticateToken(), authenticateUserRole(), restaurantsController.deleteRestaurant); // Borrar un restaurante
 
 /**
  * @swagger
@@ -139,7 +139,7 @@ router.delete('', authenticateToken(), restaurantsController.deleteRestaurant); 
  *    500:
  *     description: Error in connection
  */
-router.put('', authenticateToken(), restaurantsController.updateRestaurant); // Actualizar un restaurante existente
+router.put('', authenticateToken(), authenticateUserRole(), restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
 /**
  * @swagger
