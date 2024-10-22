@@ -7,7 +7,7 @@ export function authenticateToken() {
         const token = req.headers['authorization']?.split(' ')[1];
 
         if (!token) {
-            return res.sendStatus(HTTP_STATUS_CODES.UNAUTHORIZATION); // 401
+            return res.sendStatus(HTTP_STATUS_CODES.FORBIDDEN); // 401
         }
 
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
