@@ -1,7 +1,7 @@
 {
   "name": "backendproject",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon src/index.ts",
