@@ -4,7 +4,7 @@ import { S3Client } from '@aws-sdk/client-s3';
 import multerS3 from 'multer-s3';
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
-    const isValid = file.mimetype.endsWith('pdf');
+    const isValid = file.mimetype.endsWith('image');
     cb(null, isValid);
 };
 
