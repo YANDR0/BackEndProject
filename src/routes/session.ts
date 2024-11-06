@@ -95,4 +95,5 @@ router.post('/register', checkParameters(['email', 'name', 'password']), emailIn
  */
 router.post('/logout', authenticateToken(), sessionController.logout);
 
+
 export default router;
