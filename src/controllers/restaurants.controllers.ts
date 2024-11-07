@@ -6,7 +6,7 @@ import { HTTP_STATUS_CODES } from "../types/http-status-codes";
 class RestaurantsControllers {
 
     //Obtener todos los restaurantes existentes
-    getAll(req: Request, res: Response){
+    getAll(req: Request, res: Response) {
         Restaurant.find({}).then((response: RestaurantType[]) => {
             res.send(response);
         }).catch(() => {
@@ -15,22 +15,22 @@ class RestaurantsControllers {
     }
 
     //Obtener la información de un restaurant
-    getRestaurants(req: Request, res: Response){
+    getRestaurants(req: Request, res: Response) {
         const { _id } = req.body;
         Restaurant.findOne({ _id: _id }).then((restaurant: RestaurantType | undefined) => {
-            if(restaurant) {
+            if (restaurant) {
                 res.send(restaurant)
             } else {
                 res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Restaurant no encontrado" });
             }
         }).catch(HTTP_STATUS_CODES.SERVER_ERROR);
     };
-    
+
     //Obtener todos los restaurantes de una categoría (Igual podemos dejarlo usar más filtros)
-    getRestaurantsByCategory(req: Request, res: Response){
-        const { category } = req.body; 
+    getRestaurantsByCategory(req: Request, res: Response) {
+        const { category } = req.body;
         Restaurant.find({ category: category }).then((restaurantList: RestaurantType[] | undefined) => {
-            if(restaurantList) {
+            if (restaurantList) {
                 res.send(restaurantList)
             } else {
                 res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Restaurantes no encontrados" });
@@ -39,9 +39,12 @@ class RestaurantsControllers {
     };
 
     //Crear un nuevo establecimiento
-    createRestaurant(req: Request, res: Response){
-        const { name, rating, description, category, location, menu} = req.body;
-        const newRestaurant = new Restaurant({ name, rating, description, category, location, menu });
+    createRestaurant(req: Request, res: Response) {
+        const file = req.file as Express.MulterS3.File; // Aseguramos que req.file es de tipo MulterS3.File
+        const image = file ? file.location : null; // URL de la imagen en S3, si se subió
+
+        const { name, rating, description, category, location, menu } = req.body;
+        const newRestaurant = new Restaurant({ name, rating, description, category, location, menu, image });
         newRestaurant.save().then((restaurant: RestaurantType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(restaurant);
         }).catch(() => {
@@ -50,7 +53,7 @@ class RestaurantsControllers {
     };
 
     //Borrar un restaurant de la base
-    deleteRestaurant(req: Request, res: Response){
+    deleteRestaurant(req: Request, res: Response) {
         const { _id } = req.body;
         Restaurant.findOneAndDelete({ _id: _id }).then((deletedRestaurant: RestaurantType | null) => {
             if (deletedRestaurant) {
@@ -64,8 +67,18 @@ class RestaurantsControllers {
     };
 
     //Actualizar un negocio ya existente
-    updateRestaurant(req: Request, res: Response){
-        const { _id, updatedData } = req.body;
+    updateRestaurant(req: Request, res: Response) {
+        const { _id } = req.body;
+
+        const updatedData = req.body.updatedData || {}; // Datos a actualizar
+        const file = req.file as Express.MulterS3.File; // Aseguramos que req.file es de tipo MulterS3.File
+        const imageUrl = file ? file.location : null; // URL de la imagen en S3, si se subió
+
+        // Si hay una imagen nueva, la añadimos a los datos actualizados
+        if (imageUrl) {
+            updatedData.image = imageUrl;
+        }
+
         Restaurant.findOneAndUpdate({ _id: _id }, updatedData, { new: true }).then((updatedRestaurant: RestaurantType | undefined) => {
             if (updatedRestaurant) {
                 res.send(updatedRestaurant);
