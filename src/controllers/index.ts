@@ -4,6 +4,7 @@ import sessionController from "./session.controllers";
 import categoryControllers from "./category.controllers";
 import listControllers from "./list.controllers";
 import reviewsControllers from "./reviews.controllers";
+import uploadController from "./upload-s3.controller";
 
 export default {
     usersController,
@@ -11,5 +12,6 @@ export default {
     sessionController,
     categoryControllers,
     listControllers,
-    reviewsControllers
+    reviewsControllers,
+    uploadController
 }

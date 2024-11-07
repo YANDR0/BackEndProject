@@ -3,6 +3,7 @@ import controllers from "../controllers/index";
 import { checkParameters } from "../middlewares/checkParameters";
 import { authenticateToken } from "../middlewares/authToken";
 import { authenticateUserRole } from "../middlewares/authRoles";
+import upload from '../middlewares/upload-s3';
 
 const restaurantsController = controllers.restaurantsController;
 const router = Router();
@@ -60,7 +61,7 @@ router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
  *    500:
  *     description: Error in connection
  */
-router.post('', authenticateToken(), authenticateUserRole(), restaurantsController.createRestaurant); // Crear un nuevo restaurante
+router.post('', authenticateToken(), authenticateUserRole(), upload.single('file'), restaurantsController.createRestaurant); // Crear un nuevo restaurante
 
 /**
  * @swagger
@@ -139,7 +140,7 @@ router.delete('', authenticateToken(), authenticateUserRole(), restaurantsContro
  *    500:
  *     description: Error in connection
  */
-router.put('', authenticateToken(), authenticateUserRole(), restaurantsController.updateRestaurant); // Actualizar un restaurante existente
+router.put('', authenticateToken(), authenticateUserRole(), upload.single('file'), restaurantsController.updateRestaurant); // Actualizar un restaurante existente
 
 /**
  * @swagger
