@@ -27,32 +27,43 @@ router.get('', restaurantsController.getAll); // Obtener todos los restaurantes
  * /restaurant:
  *  post:
  *   tags: [Restaurant]
- *   description: Generate a new restaurant
+ *   description: Generate a new restaurant with an image file
  *   consumes:
- *    - application/json
+ *    - multipart/form-data
  *   requestBody:
  *    required: true
  *    content:
- *     application/json:
+ *     multipart/form-data:
  *      schema:
  *       type: object
  *       required: 
  *        - name
+ *        - file
  *       properties:
  *        name: 
  *         type: string
+ *         description: Name of the restaurant
  *        rating: 
  *         type: number
+ *         description: Rating of the restaurant
  *        description:
  *         type: string
+ *         description: Description of the restaurant
  *        category:
  *         type: array
  *         items:
  *          type: string
+ *         description: List of categories for the restaurant
  *        location:
  *         type: string
+ *         description: Location of the restaurant
  *        menu:
  *         type: string
+ *         description: Menu information of the restaurant
+ *        image:
+ *         type: string
+ *         format: binary
+ *         description: Image file for the restaurant
  *   responses: 
  *    200:
  *     description: Successful
@@ -99,13 +110,13 @@ router.delete('', authenticateToken(), authenticateUserRole(), restaurantsContro
  * /restaurant:
  *  put:
  *   tags: [Restaurant]
- *   description: Update existing restaurant
+ *   description: Update existing restaurant with an image file
  *   consumes:
- *    - application/json
+ *    - multipart/form-data
  *   requestBody:
  *    required: true
  *    content:
- *     application/json:
+ *     multipart/form-data:
  *      schema:
  *       type: object
  *       required: 
@@ -113,30 +124,41 @@ router.delete('', authenticateToken(), authenticateUserRole(), restaurantsContro
  *       properties:
  *        _id:
  *         type: string
+ *         description: Restaurant ID to update
  *        updatedData:
  *         type: object
  *         properties: 
  *          name: 
  *           type: string
+ *           description: Name of the restaurant
  *          rating: 
  *           type: number
+ *           description: Rating of the restaurant
  *          description:
  *           type: string
+ *           description: Description of the restaurant
  *          category:
  *           type: array
  *           items:
  *            type: string
+ *           description: List of categories for the restaurant
  *          location:
  *           type: string
+ *           description: Location of the restaurant
  *          menu:
  *           type: string
+ *           description: Menu information of the restaurant
+ *        image:
+ *         type: string
+ *         format: binary
+ *         description: Updated image file for the restaurant
  *   responses: 
  *    200:
  *     description: Successful
  *    400:
  *     description: Missing parameters
  *    404: 
- *     description: Element do not exist in database
+ *     description: Element does not exist in database
  *    500:
  *     description: Error in connection
  */

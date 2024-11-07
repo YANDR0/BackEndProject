@@ -25,13 +25,13 @@ router.get('', usersControllers.getAll);
  * /user/config:
  *  put:
  *   tags: [User]
- *   description: Update user
+ *   description: Update user profile with an image file
  *   consumes:
- *    - application/json
+ *    - multipart/form-data
  *   requestBody:
  *    required: true
  *    content:
- *     application/json:
+ *     multipart/form-data:
  *      schema:
  *       type: object
  *       required: 
@@ -39,32 +39,42 @@ router.get('', usersControllers.getAll);
  *       properties:
  *        _id:
  *         type: string
+ *         description: User ID to update
  *        updatedData:
  *         type: object
  *         properties: 
  *          name: 
  *           type: string
+ *           description: Name of the user
  *          email: 
  *           type: string
+ *           description: User's email address
  *          password:
  *           type: string
+ *           description: User's password
  *          role: 
  *           type: number
+ *           description: User's role identifier
  *          location:
  *           type: string
+ *           description: Location of the user
  *          biography:
  *           type: string
- *          image: 
- *           type: string
+ *           description: User's biography or description
  *          status:
- *           type: numbers
+ *           type: number
+ *           description: Account status
+ *        image:
+ *         type: string
+ *         format: binary
+ *         description: Profile image file for the user
  *   responses: 
  *    200:
  *     description: Successful
  *    400:
  *     description: Missing parameters
  *    404: 
- *     description: Element do not exist in database
+ *     description: Element does not exist in database
  *    500:
  *     description: Error in connection
  */
