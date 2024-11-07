@@ -4,6 +4,8 @@ import { User as UserType } from "../types/user";
 import { HTTP_STATUS_CODES } from "../types/http-status-codes";
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwt';
+import { sendEmail } from "../utils/sendEmail";
+
 
 class SessionControllers {
     // Iniciar sesión
@@ -59,6 +61,7 @@ class SessionControllers {
                 // Enviar respuesta al cliente con el token y el usuario
                 res.json({ token, user: rest });
             })
+            .then(() => sendEmail(email, req, res))
             .catch(() => {
                 res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
             });
