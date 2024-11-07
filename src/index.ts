@@ -35,32 +35,39 @@ connect(dbUrl as string).then(res => {
     console.log("Error");
 });
 
+
 const io = new Server(server);
 
 io.use((socket, next) => {
     const token = socket.handshake.auth.token;
     if(!token)
-        next(new Error('Token do not found'));
+        return next(new Error('Token do not found'));
 
-    //Lógica de jwt que no sé si funcione aquí (Como middleware auth token)
-    jwt.verify(token, process.env.JWT_SECRET, (err: any, user: any) => {
-        if(err)
-            next(new Error('Token unauthorized'))
-    })
-
+    try{
+        jwt.verify(token, process.env.JWT_SECRET, (err: any, user: any) => {})
+    } catch(err){
+        return next(new Error('Token unauthorized'))
+    }
+    
     next();
 })
 
 io.on('connection', (socket) => {
 
     socket.use(([event, ...args] , next) => {
-        if(event != 'sendMessage')
-            next()
+        if(event != 'sendMessage') return next()
 
-        //Lo mismo de jwt, pero ahora para rol, también ver por donde paso el token que aquí solo viene el evento
-        //Luego reviso que hay en args, según yo es info como event o data, tons xd
+        const token =  args[0].token;
+        try{
+            jwt.verify(token, process.env.JWT_SECRET, (err:any, decoded: any) => {
+                const userRole = decoded.role;
+                console.log(userRole);
+                if (userRole !== 0) return next(new Error('Invalid role'))
+            });
+        } catch {
+            return next(new Error('Invalid token'))
+        }
         next()
-
     })
 
     socket.on('joinConnection', (room) => {
