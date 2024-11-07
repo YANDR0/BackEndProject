@@ -5,6 +5,7 @@ import sessionRoutes from './session';
 import reviewsRoutes from './reviews';
 import listRoutes from './list';
 import categoryRoutes from './category';
+import uploadRoutes from './upload';
 
 const router = Router();
 
@@ -25,6 +26,8 @@ router.get('', (req, res) => {
 router.use('/session', sessionRoutes);
 router.use('/user', usersRoutes);
 router.use('/restaurant', restaurantsRoutes);
+
+router.use('/upload', uploadRoutes);
 
 router.use('/reviews', reviewsRoutes);  
 router.use('/list', listRoutes);   

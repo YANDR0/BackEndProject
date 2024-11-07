@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controllers from "../controllers/index";
 import { authenticateToken } from "../middlewares/authToken";
+import upload from '../middlewares/upload-s3';
 
 const usersControllers = controllers.usersController;
 const router = Router()
@@ -67,7 +68,7 @@ router.get('', usersControllers.getAll);
  *    500:
  *     description: Error in connection
  */
-router.put('/config', authenticateToken(), usersControllers.updateUser);
+router.put('/config', authenticateToken(),  upload.single('file'), usersControllers.updateUser);
 
 /**
  * @swagger
