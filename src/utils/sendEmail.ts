@@ -1,9 +1,8 @@
-import { Request, Response } from 'express';
 import nodeMailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
-export const sendEmail = (to: string, req: Request, res: Response) => {
+export const sendEmail = (to: string) => {
     const transporter = nodeMailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: Number(process.env.EMAIL_PORT),
@@ -13,7 +12,8 @@ export const sendEmail = (to: string, req: Request, res: Response) => {
         }
     })
 
-    const html = fs.readFileSync(path.join(__dirname, '..', 'views', 'emails', 'sample.html'));
+    const file = fs.readFileSync(path.join(__dirname, '..', 'views', 'emails', 'sample.html'));
+    const html = file.toString().replace('{user}', to);
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
@@ -25,9 +25,7 @@ export const sendEmail = (to: string, req: Request, res: Response) => {
 
     transporter.sendMail(mailOptions).then(response => {
         console.log('Response: ', response);
-        res.send('Email sent');
     }).catch(error => {
         console.log('Error: ', error);
-        res.send('Failed to send email');
     })
 }

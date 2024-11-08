@@ -60,11 +60,20 @@ class SessionControllers {
 
                 // Enviar respuesta al cliente con el token y el usuario
                 res.json({ token, user: rest });
+                console.log('Ya vamos a empezar')
             })
-            .then(() => sendEmail(email, req, res))
+            .then(() => {
+                try{
+                    sendEmail(email);
+                } catch (err){
+                    res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
+                }
+            })
             .catch(() => {
                 res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
             });
+
+            console.log('Acabó al parecer')
     }
 
 
