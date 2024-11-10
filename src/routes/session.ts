@@ -4,6 +4,7 @@ import { checkParameters } from "../middlewares/checkParameters";
 import { authenticateToken } from "../middlewares/authToken";
 import { emailInUse } from "../middlewares/emailInUse";
 import { checkPassword } from "../middlewares/authPassword";
+import passport from 'passport';
 
 const sessionController = controllers.sessionController;
 const router = Router()
@@ -94,5 +95,20 @@ router.post('/register', checkParameters(['email', 'name', 'password']), emailIn
  *     description: Error in connection
  */
 router.post('/logout', authenticateToken(), sessionController.logout);
+
+router.get('/google', passport.authenticate('google', { 
+    scope: ['profile', 'email'] 
+}));
+
+router.get('/verify',
+    passport.authenticate('google', { 
+        failureRedirect: '/login' 
+    }),
+    (req, res) => {
+      res.redirect('/'); // Enviar a home
+      //build jwt token
+      //res.send({token})
+    }
+);
 
 export default router;
