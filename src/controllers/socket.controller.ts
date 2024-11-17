@@ -14,7 +14,7 @@ export const startSocket = (io: Server) => {
             return next(new Error('Token unauthorized'))
         }
 
-        console.log("Uniendose", token)
+        console.log("Uniendose");
         next();
     })
 
@@ -22,9 +22,8 @@ export const startSocket = (io: Server) => {
 
         console.log("Conneción exitosa")
 
-        /*
         socket.use(([event, ...args] , next) => {
-            if(event != 'sendMessage') return next()
+            if(event != 'sendMessage') return next();
 
             const token =  args[0].token;
             console.log("Verificando token", token)
@@ -38,7 +37,7 @@ export const startSocket = (io: Server) => {
                 return next(new Error('Invalid token'))
             }
             next()
-        })*/
+        })
 
         socket.on('joinConnection', (room: string) => {
             console.log("Uniendose a room", room);
