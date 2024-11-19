@@ -26,7 +26,7 @@ class RestaurantsControllers {
         }).catch(HTTP_STATUS_CODES.SERVER_ERROR);
     };
 
-    //Obtener todos los restaurantes de una categoría (Igual podemos dejarlo usar más filtros)
+    //Obtener todos los restaurantes de una categoría 
     getRestaurantsByCategory(req: Request, res: Response) {
         const { category } = req.body;
         Restaurant.find({ category: category }).then((restaurantList: RestaurantType[] | undefined) => {
@@ -43,8 +43,8 @@ class RestaurantsControllers {
         const file = req.file as Express.MulterS3.File; // Aseguramos que req.file es de tipo MulterS3.File
         const image = file ? file.location : null; // URL de la imagen en S3, si se subió
 
-        const { name, rating, description, category, location, menu } = req.body;
-        const newRestaurant = new Restaurant({ name, rating, description, category, location, menu, image });
+        const { name, rating, description, category, location } = req.body;
+        const newRestaurant = new Restaurant({ name, rating, description, category, location, image });
         newRestaurant.save().then((restaurant: RestaurantType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(restaurant);
         }).catch(() => {
