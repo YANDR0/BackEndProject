@@ -6,7 +6,7 @@ const userSchema = new Schema({
     email: { type: SchemaTypes.String, required: true },
     password: { type: SchemaTypes.String },
     role: { type: SchemaTypes.Number, default: 1 },
-    location: { type: SchemaTypes.String }, //0=Zapopan, 1=Guadalajara, 2=Tlaquepaque, etc etc o el lugar también :v
+    location: { type: SchemaTypes.Number }, //0=Zapopan, 1=Guadalajara, 2=Tlaquepaque, etc etc o el lugar también :v
     biography: { type: SchemaTypes.String },
     image: { type: SchemaTypes.String },
     status: { type: SchemaTypes.Number, require: true}
