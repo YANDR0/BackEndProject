@@ -43,8 +43,8 @@ class RestaurantsControllers {
         const file = req.file as Express.MulterS3.File; // Aseguramos que req.file es de tipo MulterS3.File
         const image = file ? file.location : null; // URL de la imagen en S3, si se subió
 
-        const { name, rating, description, category, location } = req.body;
-        const newRestaurant = new Restaurant({ name, rating, description, category, location, image });
+        const { name, rating, description, category, location, price } = req.body;
+        const newRestaurant = new Restaurant({ name, rating, description, category, location, image, price });
         newRestaurant.save().then((restaurant: RestaurantType) => {
             res.status(HTTP_STATUS_CODES.CREATED).send(restaurant);
         }).catch(() => {
