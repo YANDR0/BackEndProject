@@ -21,9 +21,11 @@ class RestaurantsControllers {
             if (restaurant) {
                 res.send(restaurant)
             } else {
-                res.status(HTTP_STATUS_CODES.NOT_FOUND).send({ message: "Restaurant no encontrado" });
+                res.status(HTTP_STATUS_CODES.NOT_FOUND).send(undefined);
             }
-        }).catch(HTTP_STATUS_CODES.SERVER_ERROR);
+        }).catch(() => {
+            res.status(HTTP_STATUS_CODES.SERVER_ERROR).send(undefined);
+        });
     };
 
     //Obtener todos los restaurantes de una categoría 
