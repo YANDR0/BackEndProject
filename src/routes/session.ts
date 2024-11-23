@@ -5,6 +5,8 @@ import { authenticateToken } from "../middlewares/authToken";
 import { emailInUse } from "../middlewares/emailInUse";
 import { checkPassword } from "../middlewares/authPassword";
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import { User as UserType } from "../types/user";
 
 const sessionController = controllers.sessionController;
 const router = Router()
@@ -101,14 +103,15 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 router.get('/verify',
-    passport.authenticate('google', { 
-        failureRedirect: '/login' 
-    }),
+    passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-      res.redirect('/'); // Enviar a home
-      //build jwt token
-      //res.send({token})
+      const user = req.user; // Datos del usuario autenticado
+    //   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  
+    //   // Redirige con el token en la URL
+    //   res.redirect(`http://tu-frontend-url.com/login?token=${token}`);
     }
-);
+  );
+  
 
 export default router;
