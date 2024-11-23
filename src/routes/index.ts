@@ -6,8 +6,11 @@ import reviewsRoutes from './reviews';
 import listRoutes from './list';
 import categoryRoutes from './category';
 import uploadRoutes from './upload';
+import { googleAuth } from './../middlewares/google-auth';
 
 const router = Router();
+
+googleAuth(router);
 
 /**
  * @swagger
