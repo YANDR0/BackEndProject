@@ -105,7 +105,7 @@ router.get('/google', passport.authenticate('google', {
 router.get('/verify',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-        res.redirect('/');
+        res.redirect('http://localhost:4200/home');
         //const user = req.user; // Datos del usuario autenticado
         //   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
