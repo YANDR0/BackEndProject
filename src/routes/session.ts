@@ -98,20 +98,21 @@ router.post('/register', checkParameters(['email', 'name', 'password']), emailIn
  */
 router.post('/logout', authenticateToken(), sessionController.logout);
 
-router.get('/google', passport.authenticate('google', { 
-    scope: ['profile', 'email'] 
+router.get('/google', passport.authenticate('google', {
+    scope: ['profile', 'email'],
 }));
 
 router.get('/verify',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-      const user = req.user; // Datos del usuario autenticado
-    //   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  
-    //   // Redirige con el token en la URL
-    //   res.redirect(`http://tu-frontend-url.com/login?token=${token}`);
+        res.redirect('/');
+        //const user = req.user; // Datos del usuario autenticado
+        //   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        //   // Redirige con el token en la URL
+        //   res.redirect(`http://tu-frontend-url.com/login?token=${token}`);
     }
-  );
-  
+);
+
 
 export default router;

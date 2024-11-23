@@ -1,9 +1,10 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import session from 'express-session';
-import { Handler } from 'express';
+import { Router } from 'express';
 
-export const googleAuth = (app: { use: (arg0: Handler) => void; }) => {
+
+export const googleAuth = (router: Router) => {
     passport.use(
         new GoogleStrategy(
           {
@@ -28,13 +29,13 @@ export const googleAuth = (app: { use: (arg0: Handler) => void; }) => {
         cb(null, user);
     });
 
-    app.use(session({
+    router.use(session({
         resave: false,
         saveUninitialized: true,
         secret: process.env.SECRET_KEY 
     }));
     
     // Initialize Passport and restore authentication state if available from the session
-    app.use(passport.initialize());
-    app.use(passport.session());
+    router.use(passport.initialize());
+    router.use(passport.session());
 }
