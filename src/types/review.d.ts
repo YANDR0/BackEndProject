@@ -1,7 +1,7 @@
 export interface Review {
     userId: String;
     restaurantId: String;
-    score: number;
+    rating: number;
     content: String;
     priority: number;
 }

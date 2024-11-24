@@ -57,7 +57,7 @@ router.get('', reviewsControllers.getAll); // Obtener todas las reseñas
  *    500:
  *     description: Error in connection
  */
-router.post('',  authenticateToken(), reviewsControllers.createReview); // Crear una nueva reseña
+router.post('', authenticateToken(), reviewsControllers.createReview); // Crear una nueva reseña
 
 /**
  * @swagger
@@ -163,6 +163,6 @@ router.put('', authenticateToken(), reviewsControllers.updateReview); // Actuali
  *    500:
  *     description: Error in connection
  */
-router.post('/restaurant', authenticateToken(), reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
+router.get('/restaurant/:id', authenticateToken(), reviewsControllers.getRestaurantReviews); // Obtener todas las reseñas de un restaurante
 
 export default router;
