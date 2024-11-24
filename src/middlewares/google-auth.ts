@@ -2,40 +2,46 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import session from 'express-session';
 import { Router } from 'express';
-
+import { User } from '../types/user';
 
 export const googleAuth = (router: Router) => {
     passport.use(
         new GoogleStrategy(
-          {
-            clientID: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: process.env.GOOGLE_CALLBACK_URL
-          },
-          (accessToken, refreshToken, profile, cb) => {
-            // This callback will be called after Google's authentication process
-            // You can perform user validation or save user data to the database here
-            console.log('User profile:', profile);
-            return cb(null, profile);
-          }
+            {
+                clientID: process.env.GOOGLE_ID!,
+                clientSecret: process.env.GOOGLE_SECRET!,
+                callbackURL: process.env.GOOGLE_CALLBACK_URL!
+            },
+            (accessToken, refreshToken, profile, cb) => {
+                // Aquí puedes mapear los datos del perfil al esquema de tu usuario si es necesario
+                const user: User = {
+                    name: profile.displayName,
+                    email: profile.emails?.[0].value || '',
+                    status: 1, // Puedes establecer un estado predeterminado
+                };
+
+                console.log('User profile:', profile);
+                return cb(null, user);
+            }
         )
     );
-    
-    passport.serializeUser((user, cb) => {
-        cb(null, user);
-    });
-      
-    passport.deserializeUser((user, cb) => {
-        cb(null, user);
+
+    passport.serializeUser((user: User, cb) => {
+        cb(null, user); // Almacena los datos del usuario en la sesión
     });
 
-    router.use(session({
-        resave: false,
-        saveUninitialized: true,
-        secret: process.env.SECRET_KEY 
-    }));
-    
-    // Initialize Passport and restore authentication state if available from the session
+    passport.deserializeUser((user: User, cb) => {
+        cb(null, user); // Recupera los datos del usuario desde la sesión
+    });
+
+    router.use(
+        session({
+            resave: false,
+            saveUninitialized: true,
+            secret: process.env.SECRET_KEY!
+        })
+    );
+
     router.use(passport.initialize());
     router.use(passport.session());
-}
+};
