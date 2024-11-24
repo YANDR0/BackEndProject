@@ -99,14 +99,13 @@ router.post('/register', checkParameters(['email', 'name', 'password']), emailIn
 router.post('/logout', authenticateToken(), sessionController.logout);
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email'],
+    scope: ['profile', 'email']
 }));
 
-router.get('/verify',
+router.get('/verify', 
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-        // Redirige a un método del controlador para manejar la lógica
-        sessionController.loginWithGoogle(req, res);
+        sessionController.loginWithGoogle(req, res);  // Asegúrate de manejar el caso de error también en esta parte
     }
 );
 

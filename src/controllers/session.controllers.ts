@@ -78,12 +78,11 @@ class SessionControllers {
 
     loginWithGoogle(req: Request, res: Response) {
         const googleUser = req.user as UserType; // Datos obtenidos de Google
-
+    
         if (!googleUser || !googleUser.email) {
             return res.status(HTTP_STATUS_CODES.BAD_REQUEST).json({ message: "No se pudo obtener el usuario de Google." });
         }
-
-        // Verificar si el usuario ya existe en la base de datos
+    
         User.findOne({ email: googleUser.email })
             .then((existingUser: UserType | null) => {
                 if (existingUser) {
@@ -91,14 +90,15 @@ class SessionControllers {
                     const token = generateToken(existingUser);
                     return res.json({ token, user: existingUser });
                 }
-
+    
                 // Si el usuario no existe, crear un nuevo registro
                 const newUser = new User({
                     name: googleUser.name,
                     email: googleUser.email,
-                    role: 1 // Estado predeterminado, ajusta según sea necesario
+                    role: 1, // Estado predeterminado, ajusta según sea necesario
+                    status: 1 // O cualquier valor predeterminado
                 });
-
+    
                 return newUser.save()
                     .then((savedUser: UserType) => {
                         // Genera el token JWT para el nuevo usuario
