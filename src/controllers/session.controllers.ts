@@ -76,6 +76,41 @@ class SessionControllers {
             console.log('Acabó al parecer')
     }
 
+    loginWithGoogle(req: Request, res: Response) {
+        const googleUser = req.user as UserType; // Datos obtenidos de Google
+
+        if (!googleUser || !googleUser.email) {
+            return res.status(HTTP_STATUS_CODES.BAD_REQUEST).json({ message: "No se pudo obtener el usuario de Google." });
+        }
+
+        // Verificar si el usuario ya existe en la base de datos
+        User.findOne({ email: googleUser.email })
+            .then((existingUser: UserType | null) => {
+                if (existingUser) {
+                    // Si el usuario ya existe, genera un token JWT
+                    const token = generateToken(existingUser);
+                    return res.json({ token, user: existingUser });
+                }
+
+                // Si el usuario no existe, crear un nuevo registro
+                const newUser = new User({
+                    name: googleUser.name,
+                    email: googleUser.email,
+                    role: 1 // Estado predeterminado, ajusta según sea necesario
+                });
+
+                return newUser.save()
+                    .then((savedUser: UserType) => {
+                        // Genera el token JWT para el nuevo usuario
+                        const token = generateToken(savedUser);
+                        res.json({ token, user: savedUser });
+                    });
+            })
+            .catch(() => {
+                res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
+            });
+    }
+
 
     // Cerrar sesión
     logout(req: Request, res: Response) {
