@@ -5,6 +5,7 @@ import { HTTP_STATUS_CODES } from "../types/http-status-codes";
 export function authenticateToken() {
     return (req: Request, res: Response, next: NextFunction) => {
         const token = req.headers['authorization']?.split(' ')[1];
+        console.log(req.headers['authorization']);
 
         if (!token) {
             return res.sendStatus(HTTP_STATUS_CODES.FORBIDDEN); // 401

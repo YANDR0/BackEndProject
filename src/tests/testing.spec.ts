@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { HTTP_STATUS_CODES } from '../types/http-status-codes';
 
-describe('Tests in session api', () => {
+describe('Tests in /session', () => {
   // Crear usuario con correo ya utilizado
   it('POST /session/register - Fails for mail already in use', async () => {
     const response = await request('http://localhost:3000')
@@ -40,4 +40,53 @@ describe('Tests in session api', () => {
   });
 
 });
+
+
+describe('Tests in /restaurant', () => {
+  // Obtener la lista de restaurantes
+  it('GET /restaurant - Success without errors', async () => {
+    const response = await request('http://localhost:3000')
+      .get('/restaurant')
+      .send({})
+      
+    expect(response.status).toBe(HTTP_STATUS_CODES.SUCCESS);
+    expect(response.body).toBeInstanceOf(Array);
+  });
+
+  // Pedir información de un restaurant sin su id
+  it('POST /restaurant/info - Error for missing values', async () => {
+    const info = await request('http://localhost:3000')
+      .post('/session/login')
+      .send({
+        "email": "yael.alexrb@gmail.com",
+        "password": "qwertyuiop"
+    });
+    const token = info.body.token;
+    const response = await request('http://localhost:3000')
+      .post('/restaurant/info')
+      .set("authorization", `Bearer ${token}`)
+      .send({});
+    expect(response.status).toBe(HTTP_STATUS_CODES.BAD_REQUEST);
+  });
+
+
+  // Pedir información de un restaurant con id incorrecto
+  it('POST /restaurant/info - Error for incorrect id', async () => {
+    const info = await request('http://localhost:3000')
+      .post('/session/login')
+      .send({
+        "email": "yael.alexrb@gmail.com",
+        "password": "qwertyuiop"
+    });
+    const token = info.body.token;
+    const response = await request('http://localhost:3000')
+      .post('/restaurant/info')
+      .set("authorization", `Bearer ${token}`)
+      .send({ "_id": "1" });
+    expect(response.status).toBe(HTTP_STATUS_CODES.SERVER_ERROR);
+  });
+
+
+});
+
 
