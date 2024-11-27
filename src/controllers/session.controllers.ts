@@ -64,7 +64,7 @@ class SessionControllers {
             })
             .then(() => {
                 try{
-                    sendEmail(email);
+                    //sendEmail(email);
                 } catch (err){
                     res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
                 }
