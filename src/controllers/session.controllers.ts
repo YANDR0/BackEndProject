@@ -56,7 +56,7 @@ class SessionControllers {
                 const token = generateToken(user);
 
                 // Desestructuración para eliminar la contraseña
-                const { password, ...rest } = { password: user.password, _id: user._id, biography: user.biography, email: user.email, location: user.location, image: user.image, name: user.name, role: user.role, status: user.status }
+                const { password, ...rest } = { password: user.password, _id: user._id, biography: user.biography, email: user.email, location: user.location, image: user.image, name: user.name, status: user.status }
 
                 // Enviar respuesta al cliente con el token y el usuario
                 res.json({ token, user: rest });
@@ -64,9 +64,9 @@ class SessionControllers {
             })
             .then(() => {
                 try{
-                    //sendEmail(email);
+                    sendEmail(email);
                 } catch (err){
-                    res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
+                    console.log(err, 'Correo no enviado')
                 }
             })
             .catch(() => {

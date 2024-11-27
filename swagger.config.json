@@ -7,7 +7,8 @@
             "version": "1.0.0"
         }, 
         "servers": [
-            {"url": "https://backendproject-43du.onrender.com"}
+            {"url": "https://backendproject-43du.onrender.com"},
+            {"url": "http://localhost:3000"}
         ]
     },
     "apis": ["./src/**/*.ts"]
