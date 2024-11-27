@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwt';
 import { sendEmail } from "../utils/sendEmail";
 
-
 class SessionControllers {
     // Iniciar sesión
     login(req: Request, res: Response) {
@@ -76,7 +75,7 @@ class SessionControllers {
 
             console.log('Acabó al parecer')
     }
-
+    
     loginWithGoogle(req: Request, res: Response) {
         const googleUser = req.user as UserType; // Datos obtenidos de Google
 
@@ -90,7 +89,8 @@ class SessionControllers {
                 if (existingUser) {
                     // Si el usuario ya existe, genera un token JWT
                     const token = generateToken(existingUser);
-                    return res.json({ token, user: existingUser });
+                    res.redirect(`${process.env.WEB_URL}?token=${token}`);
+                    return;
                 }
 
                 // Si el usuario no existe, crear un nuevo registro
@@ -104,7 +104,7 @@ class SessionControllers {
                     .then((savedUser: UserType) => {
                         // Genera el token JWT para el nuevo usuario
                         const token = generateToken(savedUser);
-                        res.json({ token, user: savedUser });
+                        res.redirect(`${process.env.WEB_URL}?token=${token}`);
                     });
             })
             .catch(() => {

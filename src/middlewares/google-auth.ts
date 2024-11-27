@@ -15,9 +15,10 @@ export const googleAuth = (router: Router) => {
             (accessToken, refreshToken, profile, cb) => {
                 // Aquí puedes mapear los datos del perfil al esquema de tu usuario si es necesario
                 const user: User = {
-                    name: profile.displayName,
+                    name: profile.displayName || profile.emails?.[0].value,
                     email: profile.emails?.[0].value || '',
-                    status: 1, // Puedes establecer un estado predeterminado
+                    status: 1,
+                    role: 1 // Puedes establecer un estado predeterminado
                 };
 
                 console.log('User profile:', profile);

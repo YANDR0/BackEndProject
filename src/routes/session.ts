@@ -2,9 +2,10 @@ import { Router } from "express";
 import controllers from "../controllers/index";
 import { checkParameters } from "../middlewares/checkParameters";
 import { authenticateToken } from "../middlewares/authToken";
+import { authenticateTokenGoogle } from "../middlewares/authTokenGoogle";
 import { emailInUse } from "../middlewares/emailInUse";
 import { checkPassword } from "../middlewares/authPassword";
-import passport from 'passport';
+import passport, { use } from 'passport';
 import jwt from 'jsonwebtoken';
 import { User as UserType } from "../types/user";
 
@@ -97,6 +98,16 @@ router.post('/register', checkParameters(['email', 'name', 'password']), emailIn
  *     description: Error in connection
  */
 router.post('/logout', authenticateToken(), sessionController.logout);
+
+router.get('/profile', authenticateTokenGoogle(), (req, res) => {
+    const user = req.user; // Información descifrada del token
+    console.log("user: ", user); // Verifica qué se imprime aquí
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(401).json({ message: 'Usuario no autenticado' });
+    }
+});
 
 router.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email'],
