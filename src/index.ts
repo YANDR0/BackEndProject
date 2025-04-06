@@ -26,24 +26,23 @@ app.use(routes);
 const swaggerDocs = swaggerJSDoc(swaggerConfig);
 app.use('/swagger', serve, setup(swaggerDocs))
 
+//Conexión al puerto
 let server;
+server = app.listen(port, () => {
+    console.log(`App is running in port ${port}`)
+});
+
+//Obtención del socket
+const io = new Server(server, { cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+}});
+startSocket(io);
+
 connect(dbUrl as string).then(res => {
     console.log('Ya se conectó la base');
-    
-    //Conexión al puerto
-    server = app.listen(port, () => {
-        console.log(`App is running in port ${port}`)
-    });
-
-    //Obtención del socket
-    const io = new Server(server, { cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }});
-    startSocket(io);
-
 }).catch(err => {
-    console.log("Error");
+    console.log("Error in database");
 });
 
 
